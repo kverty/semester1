@@ -3,10 +3,10 @@
 class List
 {
 public:
-    virtual ~List();
-    virtual void addElement(int value);
+    virtual ~List() {}
+    virtual void addElement(int value) = 0;
     virtual int length();
-    virtual bool deleteElement(int value);
-    virtual void print();
+    virtual bool deleteElement(int value) = 0;
+    virtual void print() = 0;
 };
 
