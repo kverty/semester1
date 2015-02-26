@@ -49,24 +49,30 @@ void SimpleList::print()
 
 bool SimpleList::deleteElement(int value)
 {
-    ListElement *element = head;
-
-    if(element == nullptr)
+    if(head == nullptr)
         return false;
 
     bool wasFound = false;
-
-    while(element != nullptr)
+    if (head->value == value)
     {
-        if (element->next->value == value)
+        ListElement *newHead = head->next;
+        delete head;
+        head = newHead;
+        wasFound = true;
+    }
+
+    ListElement *currentElement = head;
+    while (currentElement->next != nullptr)
+    {
+        if (currentElement->next->value == value)
         {
             wasFound = true;
-            ListElement *newNext = element->next->next;
-            delete element->next;
-            element->next = newNext;
-
+            ListElement *element = currentElement->next->next;
+            delete currentElement->next;
+            currentElement->next = element;
+            continue;
         }
-        element = element->next;
+        currentElement = currentElement->next;
     }
     return wasFound;
 }

@@ -17,7 +17,7 @@ private:
     {
     public:
         ListElement(int value, ListElement *next, ListElement *prev);
-        ~ListElement();
+        ~ListElement() {}
         int value;
         ListElement *next;
         ListElement *prev;

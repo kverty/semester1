@@ -33,8 +33,13 @@ int DoubleLinkedList::length()
 
 void DoubleLinkedList::addElement(int value)
 {
-    head = new ListElement(value, head, nullptr);
-    head->next->prev = head;
+    if (head == nullptr)
+        head = new ListElement(value, nullptr, nullptr);
+    else
+    {
+        head = new ListElement(value, head, nullptr);
+        head->next->prev = head;
+    }
 }
 
 void DoubleLinkedList::print()
@@ -50,25 +55,33 @@ void DoubleLinkedList::print()
 
 bool DoubleLinkedList::deleteElement(int value)
 {
-    ListElement *element = head;
-
-    if(element == nullptr)
+    if(head == nullptr)
         return false;
 
     bool wasFound = false;
-
-    while(element != nullptr)
+    if (head->value == value)
     {
-        if (element->next->value == value)
+        ListElement *newHead = head->next;
+        delete head;
+        head = newHead;
+        head->prev = nullptr;
+        wasFound = true;
+    }
+
+    ListElement *currentElement = head;
+    while (currentElement->next != nullptr)
+    {
+        if (currentElement->next->value == value)
         {
             wasFound = true;
-            ListElement *newNext = element->next->next;
-            delete element->next;
-            element->next = newNext;
-            element->next->prev = element;
-
+            ListElement *element = currentElement->next->next;
+            delete currentElement->next;
+            currentElement->next = element;
+            if (element != nullptr)
+                currentElement->next->prev = currentElement;
+            continue;
         }
-        element = element->next;
+        currentElement = currentElement->next;
     }
     return wasFound;
 }
