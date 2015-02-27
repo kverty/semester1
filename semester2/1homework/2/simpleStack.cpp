@@ -31,14 +31,14 @@ int SimpleStack::length()
     return length;
 }
 
-double SimpleStack::top()
+int SimpleStack::top()
 {
     if (head != nullptr)
         return head->value;
     return 0;
 }
 
-double SimpleStack::pop()
+int SimpleStack::pop()
 {
     if (head == nullptr)
         return 0;
@@ -51,7 +51,7 @@ double SimpleStack::pop()
     return answer;
 }
 
-void SimpleStack::push(double value)
+void SimpleStack::push(int value)
 {
     head = new ListElement(value, head);
 }
@@ -68,5 +68,5 @@ void SimpleStack::print()
 }
 
 
-SimpleStack::ListElement::ListElement(double value, ListElement *next) : value(value), next(next) {}
+SimpleStack::ListElement::ListElement(int value, ListElement *next) : value(value), next(next) {}
 

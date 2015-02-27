@@ -6,14 +6,14 @@ public:
     ArrayStack();
     ~ArrayStack();
 
-    void push(double value);
+    void push(int value);
     int length();
-    double pop();
-    double top();
+    int pop();
+    int top();
     void print();
 
 private:
-    double *array;
+    int *array;
     int size;
     int lenght;
 };

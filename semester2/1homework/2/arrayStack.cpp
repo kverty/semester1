@@ -7,7 +7,7 @@ using namespace std;
 ArrayStack::ArrayStack()
 {
     size = 4;
-    array = new double[size];
+    array = new int[size];
     lenght = 0;
 }
 
@@ -21,12 +21,12 @@ int ArrayStack::length()
     return lenght;
 }
 
-double ArrayStack::top()
+int ArrayStack::top()
 {
     return array[lenght - 1];
 }
 
-double ArrayStack::pop()
+int ArrayStack::pop()
 {
     if (lenght == 0)
         return 0;
@@ -34,12 +34,12 @@ double ArrayStack::pop()
     return array[lenght];
 }
 
-void ArrayStack::push(double value)
+void ArrayStack::push(int value)
 {
     if (lenght == size)
     {
         size = size * 2;
-        double *newArray = new double[size];
+        int *newArray = new int[size];
         for (int i = 0; i < lenght; i++)
             newArray[i] = array[i];
         delete[] array;

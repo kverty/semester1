@@ -7,19 +7,19 @@ public:
     SimpleStack();
     ~SimpleStack();
 
-    void push(double value);
+    void push(int value);
     int length();
-    double pop();
-    double top();
+    int pop();
+    int top();
     void print();
 
 private:
     class ListElement
     {
     public:
-        ListElement(double value, ListElement *next);
+        ListElement(int value, ListElement *next);
         ~ListElement() {}
-        double value;
+        int value;
         ListElement *next;
     };
 
