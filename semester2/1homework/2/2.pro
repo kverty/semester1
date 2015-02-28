@@ -5,8 +5,8 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     simpleStack.cpp \
-    arrayStack.cpp \
-    calculator.cpp
+    calculator.cpp \
+    expressions.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -14,7 +14,7 @@ qtcAddDeployment()
 HEADERS += \
     stack.h \
     simpleStack.h \
-    arrayStack.h \
-    calculator.h
+    calculator.h \
+    expressions.h
 
 QMAKE_CXXFLAGS += -std=c++11

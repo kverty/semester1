@@ -1,22 +1,26 @@
 #include <iostream>
 #include "stack.h"
 #include "simpleStack.h"
-#include "arrayStack.h"
 #include "calculator.h"
 #include <string.h>
 
 using namespace std;
 
-const int size = 100;
-
 int main()
 {
-    char polishExpression[size];
-    cout << "Enter your math expression in Reverse Polish notation: " << endl;
-    scanf("%s", &polishExpression);
-
-    Calculator *calculator = new Calculator(polishExpression, strlen(polishExpression));
-    cout << calculator->countUp();
-
+    char *expression = new char[size];
+    cout << "Enter your math expression(in normal notation): " << endl;
+    char c;
+    int i = 0;
+    while ((c = getchar()) != '\n')
+    {
+        if (c != ' ')
+        {
+            expression[i] = c;
+            i++;
+        }
+    }
+    Calculator *calculator = new Calculator(expression, i);
+    cout << calculator->countUp() << endl;
     return 0;
 }

@@ -1,8 +1,8 @@
 #include <iostream>
 #include "stack.h"
 #include "simpleStack.h"
-#include "arrayStack.h"
 #include "calculator.h"
+#include "expressions.h"
 
 using namespace std;
 
@@ -16,63 +16,73 @@ Calculator::~Calculator()
     delete[] expression;
 }
 
-int charToInt(char c)
-{
-    return c - '0';
-}
-
-int intToChar(int c)
-{
-    return c + '0';
-}
-
-bool isDigit(char c)
-{
-    return (charToInt(c) >= 0) && (charToInt(c) <= 9);
-}
-
-int getNextNumber(char *expression, int &index)
-{
-    int answer = 0;
-    while (isDigit(expression[index]))
-    {
-        answer = answer * 10 + charToInt(expression[index]);
-        index++;
-    }
-    return answer;
-}
 
 int Calculator::countUp()
 {
-    Stack *stack = new ArrayStack();
+    //cout << "lol";
+    Token *polishExpression[size];
+    Stack *stack = new SimpleStack();
+    int j = 0;
     int i = 0;
+
     while(i < length)
     {
-        if (expression[i] == '+')
+        //cout << expression[i];
+        if (isDigit(expression[i]))
         {
-            stack->push(intToChar(charToInt(stack->pop()) + charToInt(stack->pop())));
+            int newNumber = getNextNumber(expression, length, i);
+            //cout << newNumber << endl;
+            polishExpression[j] = new Token(newNumber, number);
+            j++;
+            i--;
         }
-        else if (expression[i] == '*')
+        if ((expression[i] == '*') || (expression[i] == '/'))
         {
-            stack->push(intToChar(charToInt(stack->pop()) * charToInt(stack->pop())));
+            while((!stack->length() == 0) && ((stack->top()->type() == mult) || (stack->top()->type() == division)))
+            {
+                polishExpression[j] = stack->pop();
+                j++;
+            }
+            TokenType type = mult;
+            if (expression[i] == '/')
+                type = division;
+            stack->push(new Token(charToInt(expression[i]), type));
         }
-        else if (expression[i] == '-')
+
+        if ((expression[i] == '+') || (expression[i] == '-'))
         {
-            int second = charToInt(stack->pop());
-            int first = charToInt(stack->pop());
-            stack->push(intToChar(first - second));
+            if ((!stack->length() == 0) && (stack->top()->type() != openBracket))
+            {
+                polishExpression[j] = stack->pop();
+                j++;
+            }
+            TokenType type = minuss;
+            if (expression[i] == '+')
+                type = pluss;
+            stack->push(new Token(charToInt(expression[i]), type));
         }
-        else if (expression[i] == '/')
+        if (expression[i] == '(')
         {
-            int second = charToInt(stack->pop());
-            int first = charToInt(stack->pop());
-            stack->push(intToChar(first / second));
+            stack->push(new Token(charToInt(expression[i]), openBracket));
         }
-        else
+        if (expression[i] == ')')
         {
-            stack->push(expression[i]);
+            while(stack->top()->type() != openBracket)
+            {
+                polishExpression[j] = stack->pop();
+                j++;
+            }
+            stack->pop();
         }
         i++;
     }
-    return charToInt(stack->pop());
+
+    while (!stack->length() == 0)
+    {
+        polishExpression[j] = stack->pop();
+        j++;
+    }
+    //for (int k = 0; k < j; k++)
+    //    cout << polishExpression[k]->number() << " ";
+    return polishToAnswer(polishExpression, j);
 }

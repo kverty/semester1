@@ -1,5 +1,6 @@
 #pragma once
 #include "stack.h"
+#include "expressions.h"
 
 class SimpleStack : public Stack
 {
@@ -7,19 +8,19 @@ public:
     SimpleStack();
     ~SimpleStack();
 
-    void push(int value);
+    void push(Token *token);
     int length();
-    int pop();
-    int top();
+    Token *pop();
+    Token *top();
     void print();
 
 private:
     class ListElement
     {
     public:
-        ListElement(int value, ListElement *next);
+        ListElement(Token *token, ListElement *next);
         ~ListElement() {}
-        int value;
+        Token *token;
         ListElement *next;
     };
 

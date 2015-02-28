@@ -31,19 +31,19 @@ int SimpleStack::length()
     return length;
 }
 
-int SimpleStack::top()
+Token *SimpleStack::top()
 {
     if (head != nullptr)
-        return head->value;
+        return head->token;
     return 0;
 }
 
-int SimpleStack::pop()
+Token *SimpleStack::pop()
 {
     if (head == nullptr)
         return 0;
 
-    int answer = head->value;
+    Token *answer = head->token;
     ListElement *element = head->next;
     delete head;
     head = element;
@@ -51,9 +51,9 @@ int SimpleStack::pop()
     return answer;
 }
 
-void SimpleStack::push(int value)
+void SimpleStack::push(Token *token)
 {
-    head = new ListElement(value, head);
+    head = new ListElement(token, head);
 }
 
 void SimpleStack::print()
@@ -62,11 +62,11 @@ void SimpleStack::print()
 
     while(element != nullptr)
     {
-        cout << element->value << " ";
+        cout << element->token->number() << " ";
         element = element->next;
     }
 }
 
 
-SimpleStack::ListElement::ListElement(int value, ListElement *next) : value(value), next(next) {}
+SimpleStack::ListElement::ListElement(Token *token, ListElement *next) : token(token), next(next) {}
 
