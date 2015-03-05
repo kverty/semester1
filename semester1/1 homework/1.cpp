@@ -12,6 +12,6 @@ int main()
     int y = x * x;
     int answer = (y + 1) * (y + x) + 1;
 
-    cout << "Value of the formula: " << answer << endl;
+    cout << "Value of the formula : " << answer << endl;
     return 0;
 }
