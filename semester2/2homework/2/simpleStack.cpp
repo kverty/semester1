@@ -18,7 +18,7 @@ SimpleStack::~SimpleStack()
     }
 }
 
-int SimpleStack::length()
+int SimpleStack::mLength()
 {
     int length = 0;
     ListElement *element = head;

@@ -35,11 +35,12 @@ int Calculator::countUp()
         }
         if ((expression[i] == '*') || (expression[i] == '/'))
         {
-            while((!stack->length() == 0) && ((stack->top()->type() == mult) || (stack->top()->type() == division)))
+            while((!stack->mLength() == 0) && ((stack->top()->type() == mult) || (stack->top()->type() == division)))
             {
                 polishExpression[j] = stack->pop();
                 j++;
             }
+
             TokenType type = mult;
             if (expression[i] == '/')
                 type = division;
@@ -48,7 +49,7 @@ int Calculator::countUp()
 
         if ((expression[i] == '+') || (expression[i] == '-'))
         {
-            if ((!stack->length() == 0) && (stack->top()->type() != openBracket))
+            if ((!stack->mLength() == 0) && (stack->top()->type() != openBracket))
             {
                 polishExpression[j] = stack->pop();
                 j++;
@@ -74,7 +75,7 @@ int Calculator::countUp()
         i++;
     }
 
-    while (!stack->length() == 0)
+    while (!stack->mLength() == 0)
     {
         polishExpression[j] = stack->pop();
         j++;

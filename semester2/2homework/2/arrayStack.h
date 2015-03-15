@@ -7,7 +7,7 @@ public:
     ~ArrayStack();
 
     void push(int value);
-    int length();
+    int mLength();
     int pop();
     int top();
     void print();
@@ -15,5 +15,5 @@ public:
 private:
     int *array;
     int size;
-    int lenght;
+    int length;
 };

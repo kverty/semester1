@@ -12,7 +12,7 @@ public:
     ~SimpleStack();
 
     void push(Token *token);
-    int length();
+    int mLength();
     Token *pop();
     Token *top();
     void print();

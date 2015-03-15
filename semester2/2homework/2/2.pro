@@ -9,7 +9,6 @@ SOURCES += main.cpp \
     simpleStack.cpp
 
 include(deployment.pri)
-qtcAddDeployment()
 
 HEADERS += \
     calculator.h \

@@ -4,11 +4,9 @@
 
 using namespace std;
 
-ArrayStack::ArrayStack()
+ArrayStack::ArrayStack() : size(4), length(0), array(new int[4])
 {
-    size = 4;
-    array = new int[size];
-    lenght = 0;
+
 }
 
 ArrayStack::~ArrayStack()
@@ -16,43 +14,43 @@ ArrayStack::~ArrayStack()
     delete[] array;
 }
 
-int ArrayStack::length()
+int ArrayStack::mLength()
 {
-    return lenght;
+    return length;
 }
 
 int ArrayStack::top()
 {
-    return array[lenght - 1];
+    return array[length - 1];
 }
 
 int ArrayStack::pop()
 {
-    if (lenght == 0)
+    if (length == 0)
         return 0;
-    lenght--;
-    return array[lenght];
+    length--;
+    return array[length];
 }
 
 void ArrayStack::push(int value)
 {
-    if (lenght == size)
+    if (length == size)
     {
         size = size * 2;
         int *newArray = new int[size];
-        for (int i = 0; i < lenght; i++)
+        for (int i = 0; i < length; i++)
             newArray[i] = array[i];
         delete[] array;
         array = newArray;
     }
 
     array[lenght] = value;
-    lenght++;
+    length++;
 }
 
 void ArrayStack::print()
 {
-    for (int i = lenght - 1; i >= 0; i--)
+    for (int i = length - 1; i >= 0; i--)
         cout << array[i] << ' ';
 }
 
