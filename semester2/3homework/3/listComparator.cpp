@@ -11,5 +11,5 @@ int ComparableWithSize::CompareTo(ComparableWithSize *list)
         return bigger;
     if(list->size > size)
         return smaller;
-    return egal;
+    return equall;
 }

@@ -1,10 +1,10 @@
 #pragma once
 
 ///this type is to make comparison more undertandable
-enum comp
+enum Comp
 {
     smaller = -1,
-    egal,
+    equall,
     bigger
 };
 
@@ -13,6 +13,7 @@ class ComparableWithSize
 {
 public:
     ComparableWithSize();
+    virtual ~ComparableWithSize() {}
     /// how to compare
     int CompareTo(ComparableWithSize *list);
     /// i have print-method in SortedSet, so ComparableWithSize objects need to be printable

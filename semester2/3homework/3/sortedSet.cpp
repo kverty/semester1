@@ -53,7 +53,7 @@ bool SortedSet::deleteElement(ComparableWithSize *substance)
         return false;
 
     bool wasFound = false;
-    if (head->substance->CompareTo(substance) == egal)
+    if (head->substance->CompareTo(substance) == equall)
     {
         SetElement *newHead = head->next;
         delete head;
@@ -64,7 +64,7 @@ bool SortedSet::deleteElement(ComparableWithSize *substance)
     SetElement *currentElement = head;
     while (currentElement->next != nullptr)
     {
-        if (currentElement->next->substance->CompareTo(substance) == egal)
+        if (currentElement->next->substance->CompareTo(substance) == equall)
         {
             wasFound = true;
             SetElement *element = currentElement->next->next;
