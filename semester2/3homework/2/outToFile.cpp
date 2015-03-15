@@ -2,7 +2,7 @@
 #include "outToFile.h"
 #include <cstdio>
 
-FileOutput::FileOutput(char* filename, int *array, int length) : filename(filename), array(array), length(length)
+FileOutput::FileOutput(char* filename, int **matrix, int length) : filename(filename), matrix(matrix), length(length)
 {
 
 }
@@ -10,12 +10,14 @@ FileOutput::FileOutput(char* filename, int *array, int length) : filename(filena
 void FileOutput::out()
 {
     FILE *outFile = fopen (filename, "w");
+    int *array = squareToLinear(matrix, length);
 
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i < length * length; i++)
     {
         fprintf(outFile, "%d ", array[i]);
     }
 
     fclose(outFile);
     delete outFile;
+    delete[] array;
 }

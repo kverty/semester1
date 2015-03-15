@@ -5,10 +5,10 @@
 class ConsoleOutput : public Output
 {
 public:
-    ConsoleOutput(int *array, int length);
+    ConsoleOutput(int **matrix, int length);
     void out();
 
 private:
-    int *array;
+    int **matrix;
     int length;
 };

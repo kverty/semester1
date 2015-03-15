@@ -5,7 +5,8 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     outToConsole.cpp \
-    outToFile.cpp
+    outToFile.cpp \
+    output.cpp
 
 include(deployment.pri)
 qtcAddDeployment()

@@ -28,7 +28,7 @@ int main()
         return 0;
     }
 
-    int **matrix = new int*[n];
+    int **matrix = new int* [n];
     for (int i = 0; i < n; i++)
     {
         matrix[i] = new int[n];
@@ -49,54 +49,6 @@ int main()
         cout << endl;
     }
 
-    int *answer = new int[n * n];
-    int index = 0;
-    int x = (n - 1) / 2;
-    int y = (n - 1) / 2;
-    int round = 1;
-
-    answer[index] = matrix[x][y];
-    index++;
-
-    while(round <= (n - 1) / 2)
-    {
-        x--;
-        answer[index] = matrix[x][y];
-        index++;
-        for (int i = 0; i < 2*round - 1; i++)
-        {
-            y--;
-            answer[index] = matrix[x][y];
-            index++;
-        }
-        for (int i = 0; i < 2 * round; i++)
-        {
-            x++;
-            answer[index] = matrix[x][y];
-            index++;
-        }
-        for (int i = 0; i < 2 * round; i++)
-        {
-            y++;
-            answer[index] = matrix[x][y];
-            index++;
-        }
-        for (int i = 0; i < 2 * round; i++)
-        {
-            x--;
-            answer[index] = matrix[x][y];
-            index++;
-        }
-        /*for (int i = 0; i < round; i++)
-        {
-            y--;
-            answer[index] = matrix[x][y];
-            index++;
-        }
-        */
-        round++;
-    }
-
     int command;
     cout << "How do you want to spirally print this matrix - to file or to console? (1 or 2)" << endl;
     cin >> command;
@@ -109,13 +61,13 @@ int main()
         cout << "Print filename, please : " << endl;
         scanf("%s", filename);
 
-        output = new FileOutput(filename, answer, n * n);
+        output = new FileOutput(filename, matrix, n);
     }
 
     if (command == toConsole)
     {
 
-        output = new ConsoleOutput(answer, n * n);
+        output = new ConsoleOutput(matrix, n);
     }
 
     output->out();
@@ -125,6 +77,5 @@ int main()
         delete matrix[i];
     }
     delete matrix;
-    delete answer;
 }
 
