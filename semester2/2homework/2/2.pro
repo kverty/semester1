@@ -4,15 +4,16 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    doublelinkedList.cpp \
-    simpleList.cpp
+    calculator.cpp \
+    expressions.cpp \
+    simpleStack.cpp
 
 include(deployment.pri)
-qtcAddDeployment()
 
 HEADERS += \
-    doublelinkedList.h \
-    list.h \
-    simpleList.h
+    calculator.h \
+    expressions.h \
+    simpleStack.h \
+    stack.h
 
 QMAKE_CXXFLAGS += -std=c++11
