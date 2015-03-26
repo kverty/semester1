@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int *Output::squareToLinear(int **matrix, int n)
+int *Output::squareToLinear(int* *matrix, int n)
 {
     int *answer = new int[n * n];
     int index = 0;
@@ -19,7 +19,7 @@ int *Output::squareToLinear(int **matrix, int n)
         x--;
         answer[index] = matrix[x][y];
         index++;
-        for (int i = 0; i < 2*round - 1; i++)
+        for (int i = 0; i < 2 * round - 1; i++)
         {
             y--;
             answer[index] = matrix[x][y];
