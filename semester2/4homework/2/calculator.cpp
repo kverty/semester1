@@ -7,6 +7,9 @@ Calculator::Calculator(QWidget *parent) :
 {
     ui->setupUi(this);
     calculator = new SimpleCalculator();
+    connect(ui->firstArgument, SIGNAL(valueChanged(int)), this, SLOT(onFirstArgumentValueChanged(int)));
+    connect(ui->secondArgument, SIGNAL(valueChanged(int)), this, SLOT(onSecondArgumentValueChanged(int)));
+    connect(ui->operation, SIGNAL(currentIndexChanged(int)), this, SLOT(onOperationCurrentIndexChanged(int)));
 }
 
 Calculator::~Calculator()
@@ -15,7 +18,7 @@ Calculator::~Calculator()
 }
 
 /// when first arg is changed i change first arg in calculator and refresh the text in answer
-void Calculator::on_firstArgument_valueChanged(int arg1)
+void Calculator::onFirstArgumentValueChanged(int arg1)
 {
     calculator->changeFirstArgument(arg1);
     if (calculator->mAnswer() < error)
@@ -25,7 +28,7 @@ void Calculator::on_firstArgument_valueChanged(int arg1)
 }
 
 /// when second arg is changed i change second arg in calculator and refresh the text in answer
-void Calculator::on_secondArgument_valueChanged(int arg2)
+void Calculator::onSecondArgumentValueChanged(int arg2)
 {
     calculator->changeSecondArgument(arg2);
     if (calculator->mAnswer() < error)
@@ -35,7 +38,7 @@ void Calculator::on_secondArgument_valueChanged(int arg2)
 }
 
 /// when operation is changed i change operation in calculator and refresh the text in answer
-void Calculator::on_operation_currentIndexChanged(int index)
+void Calculator::onOperationCurrentIndexChanged(int index)
 {
     calculator->changeOperation(index);
     if (calculator->mAnswer() < error)

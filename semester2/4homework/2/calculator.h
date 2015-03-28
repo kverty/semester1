@@ -17,9 +17,9 @@ public:
     ~Calculator();
 
 private slots:
-    void on_firstArgument_valueChanged(int arg1);
-    void on_secondArgument_valueChanged(int arg2);
-    void on_operation_currentIndexChanged(int index);
+    void onFirstArgumentValueChanged(int arg1);
+    void onSecondArgumentValueChanged(int arg2);
+    void onOperationCurrentIndexChanged(int index);
 
 private:
     Ui::Calculator *ui;
