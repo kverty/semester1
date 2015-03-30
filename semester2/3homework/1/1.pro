@@ -11,9 +11,6 @@ SOURCES += main.cpp \
 include(deployment.pri)
 qtcAddDeployment()
 
-TEMPLATE = app
-TARGET = 1_2
-
 HEADERS += \
     qsort.h \
     bubblesort.h \
@@ -21,6 +18,8 @@ HEADERS += \
     sort.h \
     sortTest.h
 
-QT       += core
-QT       -= gui
+QT += core
+QT -= gui
 QT += testlib
+TEMPLATE = app
+TARGET = 1_2
