@@ -14,7 +14,7 @@ int *Output::squareToLinear(int* *matrix, int n)
     answer[index] = matrix[x][y];
     index++;
 
-    while(round <= (n - 1) / 2)
+    while (round <= (n - 1) / 2)
     {
         x--;
         answer[index] = matrix[x][y];
