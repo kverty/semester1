@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-    ListTest test;
+    StackTest test;
     QTest::qExec(&test);
 
     char *expression = new char[size];
