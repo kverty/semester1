@@ -17,14 +17,18 @@ public:
 private slots:
     void testDegenerateSimpleList()
     {
+        srand(time(NULL));
         List *list = new SimpleList();
         QVERIFY(list->length() == 0);
+        QVERIFY(!list->deleteElement(rand() % testSize));
     }
 
     void testDegenerateDoubleList()
     {
+        srand(time(NULL));
         List *list = new DoubleLinkedList();
         QVERIFY(list->length() == 0);
+        QVERIFY(!list->deleteElement(rand() % testSize));
     }
 
     void testLengthSimpleList()
