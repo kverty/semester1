@@ -8,13 +8,14 @@
 #include "arrayStack.h"
 #include <time.h>
 
-class ListTest : public QObject
+class StackTest : public QObject
 {
    Q_OBJECT
 public:
-   explicit ListTest(QObject *parent = 0) : QObject(parent) {}
+   explicit StackTest(QObject *parent = 0) : QObject(parent) {}
 
 private slots:
+    /// test for constructor and empty Stack
     void testDegenerateSimpleStack()
     {
         Stack *stack = new SimpleStack();
@@ -29,6 +30,7 @@ private slots:
         QVERIFY(stack->pop() == nullptr);
     }
 
+    /// test for push() and mLength()
     void testLengthSimleStack()
     {
         Stack *stack = new SimpleStack();
@@ -51,6 +53,7 @@ private slots:
         }
     }
 
+    /// test for pop()
     void testForGoodRemovalSimpleStack()
     {
         srand(time(NULL));

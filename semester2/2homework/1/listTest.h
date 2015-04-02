@@ -15,6 +15,7 @@ public:
    explicit ListTest(QObject *parent = 0) : QObject(parent) {}
 
 private slots:
+    ///test for constructor and empty List
     void testDegenerateSimpleList()
     {
         srand(time(NULL));
@@ -31,6 +32,7 @@ private slots:
         QVERIFY(!list->deleteElement(rand() % testSize));
     }
 
+    /// test for method length() and addElement()
     void testLengthSimpleList()
     {
         List *list = new SimpleList();
@@ -51,6 +53,7 @@ private slots:
         }
     }
 
+    /// tests for addElement() and deleteElement(), where we want to delete element we have added to the List
     void testForGoodRemovalSimpleList()
     {
         int rightLength = 0;
@@ -73,22 +76,6 @@ private slots:
         }
     }
 
-    void testForBadRemovalSimpleList()
-    {
-        srand(time(NULL));
-        int rightLength = 0;
-        List *list = new SimpleList();
-
-        for (int i = 0; i < testSize; i++)
-        {
-            list->addElement(i);
-            rightLength++;
-        }
-
-        QVERIFY(!list->deleteElement(rand() % testSize + testSize));
-        QVERIFY(list->length() == rightLength);
-    }
-
     void testForGoodRemovalDoubleList()
     {
         int rightLength = 0;
@@ -109,6 +96,23 @@ private slots:
             rightLength -= i;
             QVERIFY(list->length() == rightLength);
         }
+    }
+
+    /// test for addElement() and deleteElement() where there is no element we want to delete
+    void testForBadRemovalSimpleList()
+    {
+        srand(time(NULL));
+        int rightLength = 0;
+        List *list = new SimpleList();
+
+        for (int i = 0; i < testSize; i++)
+        {
+            list->addElement(i);
+            rightLength++;
+        }
+
+        QVERIFY(!list->deleteElement(rand() % testSize + testSize));
+        QVERIFY(list->length() == rightLength);
     }
 
     void testForBadRemovalDoubleList()
