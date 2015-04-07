@@ -18,7 +18,7 @@ bool isDigit(char c)
 }
 
 
-Token::Token(int number, TokenType type) : numbe(number), typ(type)
+Token::Token(int number, TokenType type) : numbe(number), type(type)
 {
 
 }
@@ -28,14 +28,14 @@ Token::~Token()
 
 }
 
-int Token::number()
+int Token::mNumber()
 {
     return numbe;
 }
 
-TokenType Token::type()
+TokenType Token::mType()
 {
-    return typ;
+    return type;
 }
 
 int mNextNumber(char expression[size], int length, int &index)
@@ -54,32 +54,32 @@ int polishToAnswer(Token *polishExpression[size], int length)
     Stack *stack = new SimpleStack();
     for (int i = 0; i < length; i++)
     {
-        if (polishExpression[i]->type() == number)
+        if (polishExpression[i]->mType() == number)
         {
            stack->push(polishExpression[i]);
         }
-        if (polishExpression[i]->type() == pluss)
+        if (polishExpression[i]->mType() == pluss)
         {
-            stack->push(new Token(stack->pop()->number() + stack->pop()->number(), number));
+            stack->push(new Token(stack->pop()->mNumber() + stack->pop()->mNumber(), number));
         }
-        if (polishExpression[i]->type() == mult)
+        if (polishExpression[i]->mType() == mult)
         {
-            stack->push(new Token(stack->pop()->number() * stack->pop()->number(), number));
+            stack->push(new Token(stack->pop()->mNumber() * stack->pop()->mNumber(), number));
         }
-        if (polishExpression[i]->type() == minuss)
+        if (polishExpression[i]->mType() == minuss)
         {
-            int second = stack->pop()->number();
-            int first = stack->pop()->number();
+            int second = stack->pop()->mNumber();
+            int first = stack->pop()->mNumber();
             stack->push(new Token(first - second, number));
         }
-        if (polishExpression[i]->type() == division)
+        if (polishExpression[i]->mType() == division)
         {
-            int second = stack->pop()->number();
-            int first = stack->pop()->number();
+            int second = stack->pop()->mNumber();
+            int first = stack->pop()->mNumber();
             stack->push(new Token(first / second, number));
         }
     }
-    int result = stack->pop()->number();
+    int result = stack->pop()->mNumber();
 
     return result;
 }

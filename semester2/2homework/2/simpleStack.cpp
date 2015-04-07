@@ -62,7 +62,7 @@ void SimpleStack::print()
 
     while(element != nullptr)
     {
-        cout << element->token->number() << " ";
+        cout << element->token->mNumber() << " ";
         element = element->next;
     }
 }

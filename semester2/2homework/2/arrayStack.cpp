@@ -53,7 +53,7 @@ void ArrayStack::push(Token *token)
 void ArrayStack::print()
 {
     for (int i = length - 1; i >= 0; i--)
-        cout << array[i]->number() << ' ';
+        cout << array[i]->mNumber() << ' ';
 }
 
 

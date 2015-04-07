@@ -35,7 +35,7 @@ int Calculator::countUp()
         }
         if ((expression[i] == '*') || (expression[i] == '/'))
         {
-            while((!stack->mLength() == 0) && ((stack->top()->type() == mult) || (stack->top()->type() == division)))
+            while((!stack->mLength() == 0) && ((stack->top()->mType() == mult) || (stack->top()->mType() == division)))
             {
                 polishExpression[j] = stack->pop();
                 j++;
@@ -49,7 +49,7 @@ int Calculator::countUp()
 
         if ((expression[i] == '+') || (expression[i] == '-'))
         {
-            if ((!stack->mLength() == 0) && (stack->top()->type() != openBracket))
+            if ((!stack->mLength() == 0) && (stack->top()->mType() != openBracket))
             {
                 polishExpression[j] = stack->pop();
                 j++;
@@ -65,7 +65,7 @@ int Calculator::countUp()
         }
         if (expression[i] == ')')
         {
-            while(stack->top()->type() != openBracket)
+            while(stack->top()->mType() != openBracket)
             {
                 polishExpression[j] = stack->pop();
                 j++;

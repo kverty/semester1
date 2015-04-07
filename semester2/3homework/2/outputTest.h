@@ -37,5 +37,11 @@ private slots:
         int *result = output->squareToLinear(array, 3);
         for (int i = 1; i <= 9; i++)
             QVERIFY(result[i - 1] == i);
+
+        for (int i = 0; i < 3; i++)
+            delete[] array[i];
+        delete[] array;
+        delete[] result;
+        delete output;
     }
 };

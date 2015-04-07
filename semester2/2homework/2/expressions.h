@@ -28,11 +28,11 @@ class Token
 public:
     Token(int number, TokenType type);
     ~Token();
-    int number();
-    TokenType type();
+    int mNumber();
+    TokenType mType();
 private:
     int numbe;
-    TokenType typ;
+    TokenType type;
 };
 
 int polishToAnswer(Token *polishExpression[size], int length);

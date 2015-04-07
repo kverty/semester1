@@ -20,7 +20,9 @@ HEADERS += \
     simpleStack.h \
     stack.h \
     stackTest.h \
-    arrayStack.h
+    arrayStack.h \
+    tokenTest.h \
+    calcTest.h
 
 QMAKE_CXXFLAGS += -std=c++11
 QT += testlib

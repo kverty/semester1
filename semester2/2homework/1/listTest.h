@@ -22,6 +22,8 @@ private slots:
         List *list = new SimpleList();
         QVERIFY(list->length() == 0);
         QVERIFY(!list->deleteElement(rand() % testSize));
+
+        delete list;
     }
 
     void testDegenerateDoubleList()
@@ -30,6 +32,8 @@ private slots:
         List *list = new DoubleLinkedList();
         QVERIFY(list->length() == 0);
         QVERIFY(!list->deleteElement(rand() % testSize));
+
+        delete list;
     }
 
     /// test for method length() and addElement()
@@ -41,6 +45,8 @@ private slots:
             list->addElement(i);
             QVERIFY(list->length() == i + 1);
         }
+
+        delete list;
     }
 
     void testLengthDoubleList()
@@ -51,6 +57,8 @@ private slots:
             list->addElement(i);
             QVERIFY(list->length() == i + 1);
         }
+
+        delete list;
     }
 
     /// tests for addElement() and deleteElement(), where we want to delete element we have added to the List
@@ -74,6 +82,8 @@ private slots:
             rightLength -= i;
             QVERIFY(list->length() == rightLength);
         }
+
+        delete list;
     }
 
     void testForGoodRemovalDoubleList()
@@ -96,6 +106,8 @@ private slots:
             rightLength -= i;
             QVERIFY(list->length() == rightLength);
         }
+
+        delete list;
     }
 
     /// test for addElement() and deleteElement() where there is no element we want to delete
@@ -113,6 +125,8 @@ private slots:
 
         QVERIFY(!list->deleteElement(rand() % testSize + testSize));
         QVERIFY(list->length() == rightLength);
+
+        delete list;
     }
 
     void testForBadRemovalDoubleList()
@@ -129,6 +143,8 @@ private slots:
 
         QVERIFY(!list->deleteElement(rand() % testSize + testSize));
         QVERIFY(list->length() == rightLength);
+
+        delete list;
     }
 
 private:

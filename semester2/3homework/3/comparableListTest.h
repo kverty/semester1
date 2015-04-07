@@ -21,6 +21,8 @@ private slots:
         ComparableList *list = new ComparableList();
         QVERIFY(list->length() == 0);
         QVERIFY(!list->deleteElement(rand() % testSize));
+
+        delete list;
     }
 
     /// test for method length() and addElement()
@@ -32,6 +34,8 @@ private slots:
             list->addElement(i);
             QVERIFY(list->length() == i + 1);
         }
+
+        delete list;
     }
 
     /// tests for addElement() and deleteElement(), where we want to delete element we have added to the List
@@ -55,6 +59,8 @@ private slots:
             rightLength -= i;
             QVERIFY(list->length() == rightLength);
         }
+
+        delete list;
     }
 
     /// test for addElement() and deleteElement() where there is no element we want to delete
@@ -72,6 +78,8 @@ private slots:
 
         QVERIFY(!list->deleteElement(rand() % testSize + testSize));
         QVERIFY(list->length() == rightLength);
+
+        delete list;
     }
 
     ///test for compareTo method
@@ -93,6 +101,10 @@ private slots:
         QVERIFY(list3->compareTo(list1) == 0);
         QVERIFY(list1->compareTo(list1) == 0);
         QVERIFY(list1->compareTo(list2) == 1);
+
+        delete list3;
+        delete list2;
+        delete list1;
     }
 
 private:

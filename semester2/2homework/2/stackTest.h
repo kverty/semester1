@@ -21,6 +21,8 @@ private slots:
         Stack *stack = new SimpleStack();
         QVERIFY(stack->mLength() == 0);
         QVERIFY(stack->pop() == nullptr);
+
+        delete stack;
     }
 
     void testDegenerateArrayStack()
@@ -28,6 +30,8 @@ private slots:
         Stack *stack = new ArrayStack();
         QVERIFY(stack->mLength() == 0);
         QVERIFY(stack->pop() == nullptr);
+
+        delete stack;
     }
 
     /// test for push() and mLength()
@@ -40,6 +44,8 @@ private slots:
             stack->push(token);
             QVERIFY(stack->mLength() == i + 1);
         }
+
+        delete stack;
     }
 
     void testLengthArrayStack()
@@ -51,6 +57,8 @@ private slots:
             stack->push(token);
             QVERIFY(stack->mLength() == i + 1);
         }
+
+        delete stack;
     }
 
     /// test for pop()
@@ -69,10 +77,13 @@ private slots:
 
         for (int i = testSize - 1; i >= 0; i--)
         {
-            QVERIFY(stack->pop()->number() == array[i]);
+            QVERIFY(stack->pop()->mNumber() == array[i]);
             rightLength--;
             QVERIFY(stack->mLength() == rightLength);
         }
+
+        delete stack;
+        delete[] array;
     }
 
     void testForGoodRemovalArrayStack()
@@ -91,10 +102,13 @@ private slots:
 
         for (int i = testSize - 1; i >= 0; i--)
         {
-            QVERIFY(stack->pop()->number() == array[i]);
+            QVERIFY(stack->pop()->mNumber() == array[i]);
             rightLength--;
             QVERIFY(stack->mLength() == rightLength);
         }
+
+        delete stack;
+        delete[] array;
     }
 
 

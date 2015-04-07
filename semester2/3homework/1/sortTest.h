@@ -33,6 +33,7 @@ private slots:
         }
 
         delete[] newArray;
+        delete bubbleSorter;
     }
 
     void testWithoutSortInsert()
@@ -51,6 +52,7 @@ private slots:
         }
 
         delete[] newArray;
+        delete insertSorter;
     }
 
     void testWithoutSortQuick()
@@ -69,6 +71,7 @@ private slots:
         }
 
         delete[] newArray;
+        delete qSorter;
     }
 
     ///tests method sort()
@@ -91,6 +94,7 @@ private slots:
         }
 
         delete[] sortedArray;
+        delete bubbleSorter;
     }
 
     void testInsertSort()
@@ -112,6 +116,7 @@ private slots:
         }
 
         delete[] sortedArray;
+        delete insertSorter;
     }
 
     void testQuickSort()
@@ -133,6 +138,7 @@ private slots:
         }
 
         delete[] sortedArray;
+        delete qSorter;
     }
 };
 
