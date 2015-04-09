@@ -22,7 +22,6 @@ int main()
 
     char *expression = new char[size];
     cout << "\n\nEnter your math expression(in normal notation): " << endl;
-
     char c;
     int i = 0;
     while ((c = getchar()) != '\n')

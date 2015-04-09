@@ -30,6 +30,7 @@ Token *ArrayStack::pop()
 {
     if (length == 0)
         return nullptr;
+
     length--;
     return array[length];
 }

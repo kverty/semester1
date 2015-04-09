@@ -46,7 +46,7 @@ bool ComparableList::deleteElement(int value)
         return false;
 
     bool wasFound = false;
-    while (head->value == value)
+    while(head->value == value)
     {
         ListElement *newHead = head->next;
         delete head;
@@ -71,6 +71,7 @@ bool ComparableList::deleteElement(int value)
         }
         currentElement = currentElement->next;
     }
+
     return wasFound;
 }
 

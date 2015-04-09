@@ -26,3 +26,4 @@ HEADERS += \
 
 QMAKE_CXXFLAGS += -std=c++11
 QT += testlib
+
