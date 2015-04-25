@@ -21,3 +21,17 @@ bool isOperation(char c)
 {
     return (c == '*') || (c == '/') || (c == '+') || (c == '-');
 }
+
+int readNumber(FILE *file, int startValue)
+{
+    int newValue = startValue;
+    while (true)
+    {
+        char symbol;
+        fscanf(file, "%c", &symbol);
+        if (!isDigit(symbol))
+            break;
+        newValue = newValue * 10 + (symbol - '0');
+    }
+    return newValue;
+}
