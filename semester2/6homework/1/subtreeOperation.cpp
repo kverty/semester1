@@ -2,12 +2,6 @@
 #include "subtreeOperation.h"
 #include <iostream>
 
-/*OperationSubtree::OperationSubtree(Subtree *leftSubtree, char operation, Subtree *rightSubtree) : operation(operation)
-{
-    this->leftSubtree = new Subtree();
-}
-*/
-
 OperationSubtree::~OperationSubtree()
 {
     delete leftSubtree;
