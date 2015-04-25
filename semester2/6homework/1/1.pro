@@ -15,6 +15,7 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 QMAKE_CXXFLAGS += -std=c++0x
+QT += testlib
 
 SOURCES += main.cpp \
     subtreeOperation.cpp \
@@ -26,4 +27,6 @@ HEADERS += \
     subtreeNumber.h \
     subtreeOperation.h \
     mathtree.h \
-    digits.h
+    digits.h \
+    subtreeTest.h \
+    mathtreeTest.h
