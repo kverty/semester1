@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 /// some useful functions to find numbers in string
 bool isDigit(char c);

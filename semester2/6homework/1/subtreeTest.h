@@ -17,7 +17,6 @@ private slots:
     void testNumberSubtree()
     {
         Subtree *subtree = new NumberSubtree(42);
-
         QVERIFY(subtree->count() == 42);
 
         delete subtree;
@@ -31,19 +30,19 @@ private slots:
         Subtree *subtreeMult = new OperationSubtree(subtree1, '*', subtree2);
         Subtree *subtreeMinus = new OperationSubtree(subtree1, '-', subtree2);
         Subtree *subtreeDivide = new OperationSubtree(subtree1, '/', subtree2);
-
         QVERIFY(subtreePlus->count() == 62);
         QVERIFY(subtreeMult->count() == 840);
         QVERIFY(subtreeMinus->count() == 22);
         QVERIFY(subtreeDivide->count() == 2);
 
-        delete subtree1;
-        delete subtree2;
-        delete subtree3;
-        delete subtreeMult;
-        delete subtreePlus;
+        //delete subtreeMult;
+        //std::cout << subtreeDivide->count() << "\n";
+
+        /*delete subtreePlus;
         delete subtreeDivide;
         delete subtreeMinus;
+        delete subtree1;
+        delete subtree2;*/
     }
 
     void testOperationSubtree()
@@ -56,10 +55,12 @@ private slots:
 
         QVERIFY(subtreeMult->count() == 3720);
 
+        /*
         delete subtree1;
         delete subtree2;
         delete subtree3;
         delete subtreeMult;
         delete subtreePlus;
+        */
     }
 };

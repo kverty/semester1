@@ -2,6 +2,8 @@
 #include "subtreeNumber.h"
 #include "subtreeOperation.h"
 #include "mathtree.h"
+#include "mathtreeTest.h"
+#include "subtreeTest.h"
 #include <iostream>
 #include <stdio.h>
 
@@ -11,6 +13,11 @@ const int nameSize = 20;
 
 int main()
 {
+    MathtreeTest mathtreeTest;
+    QTest::qExec(&mathtreeTest);
+    SubtreeTest subtreeTest;
+    QTest::qExec(&subtreeTest);
+
     char filename[nameSize] = {'\0'};
     MathTree *tree = new MathTree();
     printf("Please, enter the filename : \n");
