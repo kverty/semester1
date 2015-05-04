@@ -17,34 +17,30 @@ double SimpleCalculator::count()
 bool SimpleCalculator::isCorrect(QString expression)
 {
     int i = 0;
-    int digitsAfterDot = 0;
+    int tensPow = 1;
 
     if (expression[i] == '-')
         i++;
 
     while(!isOperation(expression[i]) && i < expression.length())
     {
-        if (expression[i] == '.' && digitsAfterDot == 0)
+        if (expression[i] == '.' && tensPow == 1)
         {
-            digitsAfterDot++;
+            tensPow *= 10;
         }
-        else if (expression[i] == '.' && digitsAfterDot > 0)
+        else if (expression[i] == '.' && tensPow > 1)
         {
             return false;
         }
         else
         {
             firstArg = firstArg * 10 + expression[i].digitValue();
-            if (digitsAfterDot > 0)
-                digitsAfterDot++;
+            if (tensPow > 1)
+                tensPow *= 10;
         }
 
         i++;
     }
-
-    int tensPow = 1;
-    for (int j = 1; j < digitsAfterDot; j++)
-        tensPow *= 10;
 
     firstArg = firstArg / tensPow;
 
@@ -53,31 +49,27 @@ bool SimpleCalculator::isCorrect(QString expression)
 
     operation = expression[i];
     i++;
-    digitsAfterDot = 0;
+    tensPow = 1;
 
     while(i < expression.length())
     {
-        if (expression[i] == '.' && digitsAfterDot == 0)
+        if (expression[i] == '.' && tensPow == 1)
         {
-            digitsAfterDot++;
+            tensPow *= 10;
         }
-        else if (expression[i] == '.' && digitsAfterDot > 0)
+        else if (expression[i] == '.' && tensPow > 1)
         {
             return false;
         }
         else
         {
             secondArg = secondArg * 10 + expression[i].digitValue();
-            if (digitsAfterDot > 0)
-                digitsAfterDot++;
+            if (tensPow > 1)
+                tensPow *= 10;
         }
 
         i++;
     }
-
-    tensPow = 1;
-    for (int j = 1; j < digitsAfterDot; j++)
-        tensPow *= 10;
 
     secondArg = secondArg / tensPow;
 
