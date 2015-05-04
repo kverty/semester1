@@ -1,12 +1,12 @@
-#include "comparableList.h"
-#include "listComparator.h"
+#include "simpleList.h"
+#include "list.h"
 #include <iostream>
 
 using namespace std;
 
-ComparableList::ComparableList() : head(nullptr) {}
+SimpleList::SimpleList() : head(nullptr) {}
 
-ComparableList::~ComparableList()
+SimpleList::~SimpleList()
 {
     ListElement *element = head;
 
@@ -18,18 +18,25 @@ ComparableList::~ComparableList()
     }
 }
 
-int ComparableList::length()
+int SimpleList::length()
 {
-    return size;
+    int length = 0;
+    ListElement *element = head;
+
+    while(element != nullptr)
+    {
+        element = element->next;
+        length++;
+    }
+    return length;
 }
 
-void ComparableList::addElement(int value)
+void SimpleList::addElement(int value)
 {
     head = new ListElement(value, head);
-    size++;
 }
 
-void ComparableList::print()
+void SimpleList::print()
 {
     ListElement *element = head;
 
@@ -40,7 +47,7 @@ void ComparableList::print()
     }
 }
 
-bool ComparableList::deleteElement(int value)
+bool SimpleList::deleteElement(int value)
 {
     if(head == nullptr)
         return false;
@@ -50,7 +57,6 @@ bool ComparableList::deleteElement(int value)
     {
         ListElement *newHead = head->next;
         delete head;
-        size--;
         head = newHead;
         wasFound = true;
         if(head == nullptr)
@@ -65,7 +71,6 @@ bool ComparableList::deleteElement(int value)
             wasFound = true;
             ListElement *element = currentElement->next->next;
             delete currentElement->next;
-            size--;
             currentElement->next = element;
             continue;
         }
@@ -75,4 +80,4 @@ bool ComparableList::deleteElement(int value)
     return wasFound;
 }
 
-ComparableList::ListElement::ListElement(int value, ListElement *next) : value(value), next(next) {}
+SimpleList::ListElement::ListElement(int value, ListElement *next) : value(value), next(next) {}

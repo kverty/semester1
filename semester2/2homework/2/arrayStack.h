@@ -1,4 +1,5 @@
 #include "stack.h"
+#include "expressions.h"
 
 class ArrayStack : public Stack
 {
@@ -6,14 +7,14 @@ public:
     ArrayStack();
     ~ArrayStack();
 
-    void push(int value);
+    void push(Token *token);
     int mLength();
-    int pop();
-    int top();
+    Token *pop();
+    Token *top();
     void print();
 
 private:
-    int *array;
+    Token* *array;
     int size;
     int length;
 };

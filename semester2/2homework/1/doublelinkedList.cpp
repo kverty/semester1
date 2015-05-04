@@ -1,12 +1,12 @@
-#include "comparableList.h"
-#include "listComparator.h"
 #include <iostream>
+#include "list.h"
+#include "doublelinkedList.h"
 
 using namespace std;
 
-ComparableList::ComparableList() : head(nullptr) {}
+DoubleLinkedList::DoubleLinkedList() : head(nullptr) {}
 
-ComparableList::~ComparableList()
+DoubleLinkedList::~DoubleLinkedList()
 {
     ListElement *element = head;
 
@@ -18,18 +18,31 @@ ComparableList::~ComparableList()
     }
 }
 
-int ComparableList::length()
+int DoubleLinkedList::length()
 {
-    return size;
+    int length = 0;
+    ListElement *element = head;
+
+    while(element != nullptr)
+    {
+        element = element->next;
+        length++;
+    }
+    return length;
 }
 
-void ComparableList::addElement(int value)
+void DoubleLinkedList::addElement(int value)
 {
-    head = new ListElement(value, head);
-    size++;
+    if (head == nullptr)
+        head = new ListElement(value, nullptr, nullptr);
+    else
+    {
+        head = new ListElement(value, head, nullptr);
+        head->next->prev = head;
+    }
 }
 
-void ComparableList::print()
+void DoubleLinkedList::print()
 {
     ListElement *element = head;
 
@@ -40,21 +53,21 @@ void ComparableList::print()
     }
 }
 
-bool ComparableList::deleteElement(int value)
+bool DoubleLinkedList::deleteElement(int value)
 {
     if(head == nullptr)
         return false;
 
     bool wasFound = false;
-    while(head->value == value)
+    while (head->value == value)
     {
+        wasFound = true;
         ListElement *newHead = head->next;
         delete head;
-        size--;
         head = newHead;
-        wasFound = true;
         if(head == nullptr)
             return wasFound;
+        head->prev = nullptr;
     }
 
     ListElement *currentElement = head;
@@ -65,14 +78,15 @@ bool ComparableList::deleteElement(int value)
             wasFound = true;
             ListElement *element = currentElement->next->next;
             delete currentElement->next;
-            size--;
             currentElement->next = element;
+            if (element != nullptr)
+                currentElement->next->prev = currentElement;
             continue;
         }
         currentElement = currentElement->next;
     }
-
     return wasFound;
 }
 
-ComparableList::ListElement::ListElement(int value, ListElement *next) : value(value), next(next) {}
+
+DoubleLinkedList::ListElement::ListElement(int value, ListElement *next, ListElement *prev) : value(value), next(next), prev(prev) {}

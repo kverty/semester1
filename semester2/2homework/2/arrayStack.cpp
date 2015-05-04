@@ -4,7 +4,7 @@
 
 using namespace std;
 
-ArrayStack::ArrayStack() : size(4), length(0), array(new int[4])
+ArrayStack::ArrayStack() : size(4), length(0), array(new Token*[4])
 {
 
 }
@@ -19,39 +19,42 @@ int ArrayStack::mLength()
     return length;
 }
 
-int ArrayStack::top()
+Token *ArrayStack::top()
 {
+    if (length == 0)
+        return nullptr;
     return array[length - 1];
 }
 
-int ArrayStack::pop()
+Token *ArrayStack::pop()
 {
     if (length == 0)
-        return 0;
+        return nullptr;
+
     length--;
     return array[length];
 }
 
-void ArrayStack::push(int value)
+void ArrayStack::push(Token *token)
 {
     if (length == size)
     {
         size = size * 2;
-        int *newArray = new int[size];
+        Token* *newArray = new Token*[size];
         for (int i = 0; i < length; i++)
             newArray[i] = array[i];
         delete[] array;
         array = newArray;
     }
 
-    array[lenght] = value;
+    array[length] = token;
     length++;
 }
 
 void ArrayStack::print()
 {
     for (int i = length - 1; i >= 0; i--)
-        cout << array[i] << ' ';
+        cout << array[i]->mNumber() << ' ';
 }
 
 

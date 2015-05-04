@@ -1,7 +1,6 @@
 TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
-CONFIG -= qt
 
 SOURCES += main.cpp \
     qsort.cpp \
@@ -16,5 +15,11 @@ HEADERS += \
     qsort.h \
     bubblesort.h \
     insertionsort.h \
-    sort.h
+    sort.h \
+    sortTest.h
 
+QT += core
+QT -= gui
+QT += testlib
+TEMPLATE = app
+TARGET = 1_2

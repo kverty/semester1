@@ -24,7 +24,7 @@ SortedSet::~SortedSet()
 
 void SortedSet::recursiveAdd(ComparableWithSize *substance, SetElement *element)
 {
-    if (element->next == nullptr || substance->CompareTo(element->next->substance) == smaller)
+    if (element->next == nullptr || substance->compareTo(element->next->substance) == smaller)
     {
         element->next = new SetElement(substance, element->next);
         return;
@@ -39,7 +39,7 @@ void SortedSet::addElement(ComparableWithSize *substance)
         head = new SetElement(substance, nullptr);
         return;
     }
-    if (substance->CompareTo(head->substance) == smaller)
+    if (substance->compareTo(head->substance) == smaller)
     {
         head = new SetElement(substance, head);
         return;
@@ -53,18 +53,20 @@ bool SortedSet::deleteElement(ComparableWithSize *substance)
         return false;
 
     bool wasFound = false;
-    if (head->substance->CompareTo(substance) == equall)
+    while (head->substance->compareTo(substance) == equall)
     {
         SetElement *newHead = head->next;
         delete head;
         head = newHead;
         wasFound = true;
+        if(head == nullptr)
+            return wasFound;
     }
 
     SetElement *currentElement = head;
     while (currentElement->next != nullptr)
     {
-        if (currentElement->next->substance->CompareTo(substance) == equall)
+        if (currentElement->next->substance->compareTo(substance) == equall)
         {
             wasFound = true;
             SetElement *element = currentElement->next->next;

@@ -15,7 +15,7 @@ public:
     ComparableWithSize();
     virtual ~ComparableWithSize() {}
     /// how to compare
-    int CompareTo(ComparableWithSize *list);
+    int compareTo(ComparableWithSize *list);
     /// i have print-method in SortedSet, so ComparableWithSize objects need to be printable
     virtual void print() = 0;
 

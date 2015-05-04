@@ -7,7 +7,7 @@ public:
     virtual ~Output() {}
     virtual void out() = 0;
 
-protected:
+//protected:
     /// returns array of n squared elements, in the spiral order
     int *squareToLinear(int **matrix, int n);
 };

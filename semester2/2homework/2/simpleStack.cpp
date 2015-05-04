@@ -35,13 +35,13 @@ Token *SimpleStack::top()
 {
     if (head != nullptr)
         return head->token;
-    return 0;
+    return nullptr;
 }
 
 Token *SimpleStack::pop()
 {
     if (head == nullptr)
-        return 0;
+        return nullptr;
 
     Token *answer = head->token;
     ListElement *element = head->next;
@@ -62,7 +62,7 @@ void SimpleStack::print()
 
     while(element != nullptr)
     {
-        cout << element->token->number() << " ";
+        cout << element->token->mNumber() << " ";
         element = element->next;
     }
 }
