@@ -4,6 +4,7 @@
 #include <QtTest/QTest>
 
 #include "example.h"
+#include <iostream>
 
 class ExampleTest : public QObject
 {
@@ -22,7 +23,7 @@ private slots:
 
         catch(MyError const &)
         {
-
+            std::cout << "Exception cought!\n";
         }
     }
 };

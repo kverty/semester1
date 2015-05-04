@@ -2,7 +2,8 @@
 
 class MyError
 {
-
+public:
+    MyError();
 };
 
 class Example
