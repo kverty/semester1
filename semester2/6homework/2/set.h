@@ -13,7 +13,7 @@ public:
     /// checks if this value is in the set
     bool wasAdded(const T &value);
     /// returns size of the set
-    int getSize();
+    int size();
     /// unites two sets
     Set<T> unite(Set<T> &set);
     /// intersects two sets
@@ -47,7 +47,7 @@ Set<T>::~Set()
 }
 
 template<typename T>
-int Set<T>::getSize()
+int Set<T>::size()
 {
     SetElement *element = head;
     int length = 0;
