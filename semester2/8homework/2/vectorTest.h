@@ -67,7 +67,7 @@ private slots:
             result = vector1 - vector2;
         }
 
-        catch(DifferentDim)
+        catch(DifferentDimensionException)
         {
             excWorked = true;
         }
@@ -100,7 +100,7 @@ private slots:
             QVERIFY(result == vector2);
         }
 
-        catch(DifferentDim)
+        catch(DifferentDimensionException)
         {
             QVERIFY(false);
         }
@@ -122,7 +122,7 @@ private slots:
             result = vector1 - vector2;
         }
 
-        catch(DifferentDim)
+        catch(DifferentDimensionException)
         {
             excWorked = true;
         }
@@ -152,7 +152,7 @@ private slots:
             QVERIFY(result == vector3);
         }
 
-        catch(DifferentDim)
+        catch(DifferentDimensionException)
         {
             QVERIFY(false);
         }
@@ -197,7 +197,7 @@ private slots:
             int result = vector1 * vector2;
         }
 
-        catch(DifferentDim)
+        catch(DifferentDimensionException)
         {
             excWorked = true;
         }
@@ -230,7 +230,7 @@ private slots:
             QVERIFY(result == answer);
         }
 
-        catch(DifferentDim)
+        catch(DifferentDimensionException)
         {
             QVERIFY(false);
         }
