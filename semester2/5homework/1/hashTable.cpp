@@ -26,7 +26,7 @@ HashTable::~HashTable()
     delete hash;
 }
 
-void HashTable::addValue(std::string &newString)
+void HashTable::addValue(const std::string &newString)
 {
     if (hash == nullptr)
         return;
@@ -34,7 +34,7 @@ void HashTable::addValue(std::string &newString)
     hashTable[hash->count(newString, hashTableSize)]->addElement(newString);
 }
 
-bool HashTable::wasAdded(std::string &wantedString)
+bool HashTable::wasAdded(const string &wantedString)
 {
     if (hash == nullptr)
         return false;
@@ -42,7 +42,7 @@ bool HashTable::wasAdded(std::string &wantedString)
     return hashTable[hash->count(wantedString, hashTableSize)]->wasAdded(wantedString);
 }
 
-bool HashTable::deleteValue(std::string &wantedString)
+bool HashTable::deleteValue(const std::string &wantedString)
 {
     if (hash == nullptr)
         return false;
