@@ -3,18 +3,18 @@
 
 using namespace std;
 
-void UniqueList::addElement(int value) throw (DublicateExc)
+void UniqueList::addElement(int value) throw (DublicateException)
 {
     if (wasAdded(value))
-        throw DublicateExc();
+        throw DublicateException();
 
     SimpleList::addElement(value);
 }
 
-void UniqueList::deleteElement(int value) throw (ElementNotFoundExc)
+void UniqueList::deleteElement(int value) throw (ElementNotFoundException)
 {
     if (!wasAdded(value))
-        throw ElementNotFoundExc();
+        throw ElementNotFoundException();
 
     SimpleList::deleteElement(value);
 }

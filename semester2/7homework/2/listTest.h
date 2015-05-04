@@ -20,19 +20,9 @@ private slots:
     {
         srand(time(NULL));
         List *list = new UniqueList();
-        bool excWorking = false;
 
         QVERIFY(list->length() == 0);
-        try
-        {
-            list->deleteElement(rand() % testSize);
-        }
-        catch (ElementNotFoundExc const &)
-        {
-            excWorking = true;
-        }
-
-        QVERIFY(excWorking);
+        QVERIFY_EXCEPTION_THROWN(list->deleteElement(rand() % testSize), ElementNotFoundException);
 
         delete list;
     }
@@ -42,7 +32,7 @@ private slots:
     {
         List *list = new UniqueList();
         bool excWorking = false;
-
+        /// i can't use QVERIFY_EXCEPTION_THROWN here, because here should not be any exceptions and i check it
         try
         {
             for (int i = 0; i < testSize; i++)
@@ -52,7 +42,7 @@ private slots:
             }
         }
 
-        catch(DublicateExc const &)
+        catch(DublicateException const &)
         {
             excWorking = true;
         }
@@ -83,12 +73,12 @@ private slots:
             }
         }
 
-        catch(DublicateExc)
+        catch(DublicateException)
         {
             QVERIFY(false);
         }
 
-        catch(ElementNotFoundExc)
+        catch(ElementNotFoundException)
         {
             QVERIFY(false);
         }
@@ -113,12 +103,12 @@ private slots:
             list->deleteElement(rand() % testSize + testSize);
             QVERIFY(list->length() == rightLength);
         }
-        catch(DublicateExc)
+        catch(DublicateException)
         {
             QVERIFY(false);
         }
 
-        catch(ElementNotFoundExc)
+        catch(ElementNotFoundException)
         {
             QVERIFY(true);
         }

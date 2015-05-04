@@ -2,12 +2,12 @@
 #include "simpleList.h"
 #include <exception>
 
-class DublicateExc
+class DublicateException
 {
 
 };
 
-class ElementNotFoundExc
+class ElementNotFoundException
 {
 
 };
@@ -17,8 +17,8 @@ class UniqueList : public SimpleList
 {
 public:
     /// adds element, doesn't add dublicate
-    void addElement(int value) throw (DublicateExc);
+    void addElement(int value) throw (DublicateException);
     /// removes value, throws exception if there is no such element
-    void deleteElement(int value) throw (ElementNotFoundExc);
+    void deleteElement(int value) throw (ElementNotFoundException);
 };
 
