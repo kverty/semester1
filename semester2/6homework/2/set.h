@@ -8,12 +8,12 @@ public:
     Set() : head(nullptr) {}
     ~Set();
 
-    void addValue(T value);
-    bool deleteValue(T value);
+    void addValue(const T &value);
+    bool deleteValue(const T &value);
     /// checks if this value is in the set
-    bool wasAdded(T value);
+    bool wasAdded(const T &value);
     /// returns size of the set
-    int mSize();
+    int getSize();
     /// unites two sets
     Set<T> unite(Set<T> &set);
     /// intersects two sets
@@ -47,7 +47,7 @@ Set<T>::~Set()
 }
 
 template<typename T>
-int Set<T>::mSize()
+int Set<T>::getSize()
 {
     SetElement *element = head;
     int length = 0;
@@ -62,14 +62,14 @@ int Set<T>::mSize()
 }
 
 template<typename T>
-void Set<T>::addValue(T value)
+void Set<T>::addValue(const T &value)
 {
     if (!wasAdded(value))
         head = new SetElement(value, head);
 }
 
 template<typename T>
-bool Set<T>::deleteValue(T value)
+bool Set<T>::deleteValue(const T &value)
 {
     if (head == nullptr)
         return false;
@@ -108,7 +108,7 @@ bool Set<T>::deleteValue(T value)
 }
 
 template<typename T>
-bool Set<T>::wasAdded(T value)
+bool Set<T>::wasAdded(const T &value)
 {
     if (head == nullptr)
         return false;
