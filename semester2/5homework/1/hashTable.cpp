@@ -6,6 +6,13 @@
 
 using namespace std;
 
+void HashTable::clear()
+{
+    for (int i = 0; i < hashTableSize; i++)
+        delete hashTable[i];
+    delete[] hashTable;
+}
+
 HashTable::HashTable() : hash(nullptr), hashTableSize(5)
 {
     hashTable = new SimpleList *[hashTableSize];
@@ -15,14 +22,11 @@ HashTable::HashTable() : hash(nullptr), hashTableSize(5)
 
 HashTable::~HashTable()
 {
-    for (int i = 0; i < hashTableSize; i++)
-        delete hashTable[i];
-
-    delete hashTable;
+    clear();
     delete hash;
 }
 
-void HashTable::addValue(std::string newString)
+void HashTable::addValue(std::string &newString)
 {
     if (hash == nullptr)
         return;
@@ -30,7 +34,7 @@ void HashTable::addValue(std::string newString)
     hashTable[hash->count(newString, hashTableSize)]->addElement(newString);
 }
 
-bool HashTable::wasAdded(std::string wantedString)
+bool HashTable::wasAdded(std::string &wantedString)
 {
     if (hash == nullptr)
         return false;
@@ -38,7 +42,7 @@ bool HashTable::wasAdded(std::string wantedString)
     return hashTable[hash->count(wantedString, hashTableSize)]->wasAdded(wantedString);
 }
 
-bool HashTable::deleteValue(std::string wantedString)
+bool HashTable::deleteValue(std::string &wantedString)
 {
     if (hash == nullptr)
         return false;
@@ -69,10 +73,7 @@ void HashTable::newHash(HashFunction *newHash)
         }
     }
 
-    for (int i = 0; i < hashTableSize; i++)
-        delete hashTable[i];
-
-    delete hashTable;
+    clear();
 
     hashTable = newHashTable;
     hash = newHash;
@@ -93,10 +94,7 @@ void HashTable::resize()
         }
     }
 
-    for (int i = 0; i < hashTableSize; i++)
-        delete hashTable[i];
-
-    delete hashTable;
+    clear();
 
     hashTable = newHashTable;
     hashTableSize = hashTableSize * 2;

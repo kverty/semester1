@@ -11,11 +11,11 @@ public:
     HashTable();
     ~HashTable();
     ///adds value, that shuld be string
-    void addValue(std::string newString);
+    void addValue(const std::string &newString);
     ///returns true if in the table there is wanted string
-    bool wasAdded(std::string wantedString);
+    bool wasAdded(const std::string &wantedString);
     ///obviously delete some string, if there is no such string returns false
-    bool deleteValue(std::string wantedString);
+    bool deleteValue(const std::string &wantedString);
     /// it can change hash during the process and rewrite the table
     void newHash(HashFunction *newHash);
     /// show some stats - load factor, number of empty cells
@@ -25,6 +25,8 @@ private:
     HashFunction *hash;
     SimpleList* *hashTable;
     int hashTableSize;
+    /// clears table
+    void clear();
     /// can be resized if load factor is too big
     void resize();
 };
