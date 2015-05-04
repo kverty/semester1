@@ -5,6 +5,7 @@
 
 #include "list.h"
 #include "uniqueList.h"
+#include "simpleList.h"
 #include <time.h>
 
 class ListTest : public QObject

@@ -19,9 +19,11 @@ TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += main.cpp \
-    uniqueList.cpp
+    uniqueList.cpp \
+    simpleList.cpp
 
 HEADERS += \
     list.h \
     listTest.h \
-    uniqueList.h
+    uniqueList.h \
+    simpleList.h
