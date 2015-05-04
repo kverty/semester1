@@ -59,20 +59,14 @@ private slots:
     {
         Vector<int> vector1(3);
         Vector<int> vector2(4);
-        bool excWorked = false;
 
-        try
+        QVERIFY_EXCEPTION_THROWN(
         {
             Vector<int> result;
             result = vector1 - vector2;
-        }
+        },
+        DifferentDimensionException);
 
-        catch(DifferentDimensionException)
-        {
-            excWorked = true;
-        }
-
-        QVERIFY(excWorked);
 
         int *coordinates1 = new int[4];
         int *coordinates2 = new int[4];
@@ -114,20 +108,14 @@ private slots:
     {
         Vector<double> vector1(3);
         Vector<double> vector2(4);
-        bool excWorked = false;
 
-        try
+        QVERIFY_EXCEPTION_THROWN(
         {
             Vector<double> result;
             result = vector1 - vector2;
-        }
+        },
+        DifferentDimensionException);
 
-        catch(DifferentDimensionException)
-        {
-            excWorked = true;
-        }
-
-        QVERIFY(excWorked);
 
         double *coordinates1 = new double[4];
         double *coordinates2 = new double[4];
@@ -190,19 +178,7 @@ private slots:
         Vector<int> vector1(5);
         Vector<int> vector2(4);
 
-        bool excWorked = false;
-
-        try
-        {
-            int result = vector1 * vector2;
-        }
-
-        catch(DifferentDimensionException)
-        {
-            excWorked = true;
-        }
-
-        QVERIFY(excWorked);
+        QVERIFY_EXCEPTION_THROWN(int result = vector1 * vector2, DifferentDimensionException);
 
         int *coordinates1 = new int[4];
 
