@@ -2,7 +2,6 @@
 #define XSANDOS_H
 
 #include <QMainWindow>
-#include <QSignalMapper>
 #include <QPushButton>
 #include <QGridLayout>
 #include <QLayout>
