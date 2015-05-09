@@ -24,14 +24,11 @@ bool SimpleCalculator::isCorrect(QString expression)
 
     while(!isOperation(expression[i]) && i < expression.length())
     {
-        if (expression[i] == '.' && tensPow == 1)
-        {
-            tensPow *= 10;
-        }
-        else if (expression[i] == '.' && tensPow > 1)
-        {
+        if (expression[i] == '.' && tensPow > 1)
             return false;
-        }
+
+        if (expression[i] == '.' && tensPow == 1)
+            tensPow *= 10;
         else
         {
             firstArg = firstArg * 10 + expression[i].digitValue();
@@ -42,7 +39,7 @@ bool SimpleCalculator::isCorrect(QString expression)
         i++;
     }
 
-    firstArg = firstArg / tensPow;
+    firstArg = 10 * firstArg / tensPow;
 
     if (expression[0] == '-')
         firstArg *= -1;
@@ -53,14 +50,11 @@ bool SimpleCalculator::isCorrect(QString expression)
 
     while(i < expression.length())
     {
-        if (expression[i] == '.' && tensPow == 1)
-        {
-            tensPow *= 10;
-        }
-        else if (expression[i] == '.' && tensPow > 1)
-        {
+        if (expression[i] == '.' && tensPow > 1)
             return false;
-        }
+
+        if (expression[i] == '.' && tensPow == 1)
+            tensPow *= 10;
         else
         {
             secondArg = secondArg * 10 + expression[i].digitValue();
@@ -71,7 +65,7 @@ bool SimpleCalculator::isCorrect(QString expression)
         i++;
     }
 
-    secondArg = secondArg / tensPow;
+    secondArg = 10 * secondArg / tensPow;
 
     if (operation == '/' && secondArg == 0)
         return false;
