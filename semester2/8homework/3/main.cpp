@@ -2,7 +2,7 @@
 #include <QApplication>
 
 /// size of the field
-const int size = 5;
+const int size = 7;
 
 int main(int argc, char *argv[])
 {
