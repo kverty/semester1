@@ -97,9 +97,7 @@ void Server::newClient()
 {
     tcpSocket = tcpServer->nextPendingConnection();
     connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readMessage()));
-    statusLabel->setText(tr("The server is running on\n\nIP: %1\nport: %2\n\n"
-                            "Client connected, you can send messages")
-                         .arg(ipAddress).arg(tcpServer->serverPort()));
+    statusLabel->setText(statusLabel->text() + "\nClient connected, you can send messages");
 }
 
 void Server::sendMessage()
@@ -162,4 +160,22 @@ void Server::resetLayout()
     gridLayout->addWidget(sendButton);
     gridLayout->addWidget(quitButton);
     setLayout(gridLayout);
+}
+
+Server::~Server()
+{
+    delete statusLabel;
+
+    for (int i = 0; i < messages.length(); i++)
+        delete messages[i];
+
+    delete quitButton;
+    delete sendButton;
+
+    delete newMessage;
+
+    delete tcpServer;
+    delete tcpSocket;
+
+    delete networkSession;
 }

@@ -4,7 +4,7 @@
 #include "client.h"
 
 Client::Client(QWidget *parent): QDialog(parent), hostLabel(new QLabel(tr("&Server name:"))), portLabel(new QLabel(tr("S&erver port:"))),
-    statusLabel(new QLabel(tr("This examples requires that you run the ""Fortune Server example as well."))),
+    statusLabel(new QLabel(tr("This examples requires that you run the ""Message Server example as well."))),
     hostCombo(new QComboBox), portLineEdit(new QLineEdit), newMessage(new QLineEdit("")), quitButton(new QPushButton(tr("Quit"))),
     connectButton(new QPushButton(tr("Connect"))), sendButton(new QPushButton("Send")), buttonBox(new QDialogButtonBox),
     tcpSocket(new QTcpSocket(this)), blockSize(0), historySize(10), networkSession(nullptr)
@@ -83,6 +83,30 @@ Client::Client(QWidget *parent): QDialog(parent), hostLabel(new QLabel(tr("&Serv
     }
 }
 
+Client::~Client()
+{
+    delete hostLabel;
+    delete portLabel;
+    delete statusLabel;
+
+    for (int i = 0; i < messages.length(); i++)
+        delete messages[i];
+
+    delete hostCombo;
+
+    delete portLineEdit;
+    delete newMessage;
+
+    delete quitButton;
+    delete connectButton;
+    delete sendButton;
+    delete buttonBox;
+
+    delete tcpSocket;
+
+    delete networkSession;
+}
+
 void Client::connectToServer()
 {
     connectButton->setEnabled(false);
@@ -100,19 +124,19 @@ void Client::displayError(QAbstractSocket::SocketError socketError)
     case QAbstractSocket::RemoteHostClosedError:
         break;
     case QAbstractSocket::HostNotFoundError:
-        QMessageBox::information(this, tr("Fortune Client"),
+        QMessageBox::information(this, tr("Message Client"),
                                  tr("The host was not found. Please check the "
                                     "host name and port settings."));
         break;
     case QAbstractSocket::ConnectionRefusedError:
-        QMessageBox::information(this, tr("Fortune Client"),
+        QMessageBox::information(this, tr("Message Client"),
                                  tr("The connection was refused by the peer. "
-                                    "Make sure the fortune server is running, "
+                                    "Make sure the message server is running, "
                                     "and check that the host name and port "
                                     "settings are correct."));
         break;
     default:
-        QMessageBox::information(this, tr("Fortune Client"),
+        QMessageBox::information(this, tr("Message Client"),
                                  tr("The following error occurred: %1.")
                                  .arg(tcpSocket->errorString()));
     }

@@ -11,6 +11,7 @@ class Client : public QDialog
 
 public:
     Client(QWidget *parent = 0);
+    ~Client();
 
 private slots:
     void connectToServer();

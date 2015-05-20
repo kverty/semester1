@@ -11,6 +11,7 @@ class Server : public QDialog
 
 public:
     Server(QWidget *parent = 0);
+    ~Server();
 
 private slots:
     void sessionOpened();
@@ -25,7 +26,7 @@ private:
     QLabel *statusLabel;
     QVector<QLabel*> messages;
 
-    QPushButton *quitButton;\
+    QPushButton *quitButton;
     QPushButton *sendButton;
 
     QLineEdit *newMessage;
