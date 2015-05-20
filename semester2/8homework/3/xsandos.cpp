@@ -53,6 +53,11 @@ XsAndOs::XsAndOs(int size, QWidget *parent) : QMainWindow(parent), ui(new Ui::Xs
 XsAndOs::~XsAndOs()
 {
     delete ui;
+
+    delete whoseTurn;
+    for (int i = 0; i < size; i++)
+        for (int j = 0; j < size; j++)
+            delete field[i][j];
 }
 
 void XsAndOs::changeWhoseTurn()
