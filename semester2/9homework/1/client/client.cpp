@@ -101,10 +101,6 @@ Client::~Client()
     delete connectButton;
     delete sendButton;
     delete buttonBox;
-
-    delete tcpSocket;
-
-    delete networkSession;
 }
 
 void Client::connectToServer()

@@ -174,8 +174,5 @@ Server::~Server()
 
     delete newMessage;
 
-    delete tcpServer;
     delete tcpSocket;
-
-    delete networkSession;
 }
