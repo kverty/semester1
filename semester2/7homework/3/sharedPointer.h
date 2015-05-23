@@ -15,9 +15,7 @@ public:
 
     ~SharedPtr()
     {
-        mPtrData->mRefCount--;
-        if (mPtrData->mRefCount == 0)
-            delete mPtrData;
+        deletePtr();
     }
 
     /// two fuctions for better testing
@@ -32,21 +30,10 @@ public:
     }
 
     /// operator =
-    SharedPtr<T> operator=(SharedPtr<T> &ptr)
-    {
-        mPtrData->mRefCount--;
-        if (mPtrData->mRefCount == 0)
-            delete mPtrData;
-
-        if (mPtrData != ptr.mPtrData)
-        {
-            mPtrData = ptr.mPtrData;
-            mPtrData->mRefCount++;
-        }
-        return *this;
-    }
+    SharedPtr<T> &operator=(SharedPtr<T> &ptr);
 
 private:
+    void deletePtr();
     /// this structure is needed to change at once all the pointers with same object
     struct PtrData
     {
@@ -63,3 +50,24 @@ private:
 
     PtrData *mPtrData;
 };
+
+template<typename T>
+void SharedPtr<T>::deletePtr()
+{
+    mPtrData->mRefCount--;
+    if (mPtrData->mRefCount == 0)
+        delete mPtrData;
+}
+
+template<typename T>
+SharedPtr<T> &SharedPtr<T>::operator=(SharedPtr<T> &ptr)
+{
+    deletePtr();
+
+    if (mPtrData != ptr.mPtrData)
+    {
+        mPtrData = ptr.mPtrData;
+        mPtrData->mRefCount++;
+    }
+    return *this;
+}
