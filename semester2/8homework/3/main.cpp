@@ -6,8 +6,11 @@ const int size = 7;
 
 int main(int argc, char *argv[])
 {
+    GameTest test(argc, argv);
+    QTest::qExec(&test);
+
     QApplication a(argc, argv);
-    XsAndOs w(size);
+    XsAndOs w(false, size);
     w.show();
 
     return a.exec();

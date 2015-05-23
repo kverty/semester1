@@ -1,7 +1,7 @@
 #include "xsandos.h"
 #include "ui_xsandos.h"
 
-XsAndOs::XsAndOs(int size, QWidget *parent) : QMainWindow(parent), ui(new Ui::XsAndOs), size(size)
+XsAndOs::XsAndOs(bool isTest, int size, QWidget *parent) : QMainWindow(parent), ui(new Ui::XsAndOs), size(size)
 {
     ui->setupUi(this);
 
@@ -39,15 +39,15 @@ XsAndOs::XsAndOs(int size, QWidget *parent) : QMainWindow(parent), ui(new Ui::Xs
         for (int j = 0; j < size * size; j++)
             connect(field[i % size][i / size], SIGNAL(clickedCorrectly()), field[j % size][j / size], SLOT(nextTurn()));
 
-    //gridLayout->addWidget(rules, size + 1, 1);
     gridLayout->addWidget(whoseTurn, size + 1, size - 1);
 
     ui->centralWidget->setLayout(gridLayout);
 
     QString str;
-    QLineEdit *rules = new QLineEdit("Click on buttons to write O or X\nTo win you need to get " + str.setNum(symbolsInTheRow) + " in line.");
-    rules->resize(500, 20);
-    rules->show();
+    QMessageBox *rules = new QMessageBox;
+    rules->setText("Click on buttons to write O or X\nTo win you need to get " + str.setNum(symbolsInTheRow) + " in line.");
+    if (!isTest)
+        rules->exec();
 }
 
 XsAndOs::~XsAndOs()

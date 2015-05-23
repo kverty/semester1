@@ -1,12 +1,33 @@
-#ifndef XSANDOS_H
-#define XSANDOS_H
-
+#pragma once
 #include <QMainWindow>
 #include <QPushButton>
 #include <QGridLayout>
 #include <QLayout>
 #include <QObject>
 #include <QLineEdit>
+#include <QMessageBox>
+
+#include <QtCore/QObject>
+#include <QtTest/QTest>
+
+/// tests for game rules
+/// it is here, not in the separate header, because i need to write that this class is friend of others
+class GameTest : public QObject
+{
+    Q_OBJECT
+public:
+    explicit GameTest(int argc, char *argv[], QObject *parent = 0) : argc(argc), argv(argv), QObject(parent) {}
+
+private slots:
+    void winningTest();
+    void notWinningTest();
+    void noLineTest();
+
+private:
+    int argc;
+    char **argv;
+};
+
 
 namespace Ui {
 class XsAndOs;
@@ -36,6 +57,8 @@ public:
         pushButton->disconnect(pushButton, SIGNAL(clicked()), this, SLOT(changeSymbol()));
     }
 
+    friend GameTest;
+
 public slots:
     /// works when we click on button, changes symbol written on the button
     void changeSymbol();
@@ -58,19 +81,20 @@ class XsAndOs : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit XsAndOs(int size, QWidget *parent = 0);
+    explicit XsAndOs(bool isTest, int size, QWidget *parent = 0);
     ~XsAndOs();
     /// writes who win
     void finishGame();
+
+    friend GameTest;
 
 private:
     Ui::XsAndOs *ui;
     /// size of field
     int size;
     MyButton* **field;
-    //QLineEdit *rules;
     QLineEdit *whoseTurn;
-    /// number of symbols in the row ypu should get to win
+    /// number of symbols in the row you should get to win
     int symbolsInTheRow;
 
 public slots:
@@ -79,5 +103,3 @@ public slots:
     /// checkes if somebody wins
     void check();
 };
-
-#endif // XSANDOS_H

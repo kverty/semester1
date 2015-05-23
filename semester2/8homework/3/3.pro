@@ -11,9 +11,11 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = 3
 TEMPLATE = app
 
+QT += testlib
 
 SOURCES += main.cpp\
-        xsandos.cpp
+        xsandos.cpp \
+    xsandosTest.cpp
 
 HEADERS  += xsandos.h
 
