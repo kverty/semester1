@@ -22,4 +22,5 @@ SOURCES += main.cpp
 
 HEADERS += \
     bag.h \
-    bagTest.h
+    bagTest.h \
+    AVLTree.h
