@@ -8,7 +8,7 @@ public:
     SharedPtr() : mPtrData(nullptr, 0) {}
     SharedPtr(T *object) : mPtrData(new PtrData(object, 1)) {}
     /// copy constructor
-    SharedPtr(SharedPtr<T> &ptr) : mPtrData(ptr.mPtrData)
+    SharedPtr(SharedPtr<T> const &ptr) : mPtrData(ptr.mPtrData)
     {
         mPtrData->mRefCount++;
     }
@@ -30,7 +30,7 @@ public:
     }
 
     /// operator =
-    SharedPtr<T> &operator=(SharedPtr<T> &ptr);
+    SharedPtr<T> &operator=(SharedPtr<T> const &ptr);
 
 private:
     void deletePtr();
@@ -60,7 +60,7 @@ void SharedPtr<T>::deletePtr()
 }
 
 template<typename T>
-SharedPtr<T> &SharedPtr<T>::operator=(SharedPtr<T> &ptr)
+SharedPtr<T> &SharedPtr<T>::operator=(SharedPtr<T> const &ptr)
 {
     deletePtr();
 
