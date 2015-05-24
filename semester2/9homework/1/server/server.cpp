@@ -6,10 +6,43 @@
 #include "server.h"
 
 
-Server::Server(QWidget *parent): QDialog(parent), statusLabel(new QLabel), quitButton(new QPushButton(tr("Quit"))),
-    sendButton(new QPushButton("Send")), newMessage(new QLineEdit("")), tcpServer(nullptr),
-    tcpSocket(nullptr), historySize(10), networkSession(nullptr), blockSize(0)
+Server::Server(QWidget *parent): QDialog(parent), hostLabel(new QLabel(tr("&Server name:"))), hostCombo(new QComboBox),
+    startButton(new QPushButton(tr("Start"))), statusLabel(new QLabel), quitButton(new QPushButton(tr("Quit"))),
+    sendButton(new QPushButton("Send")), newMessage(new QLineEdit("")), tcpServer(nullptr), tcpSocket(nullptr),
+    historySize(10), networkSession(nullptr), blockSize(0)
+
 {
+    // find out name of this machine
+    QString name = QHostInfo::localHostName();
+    if (!name.isEmpty())
+    {
+        hostCombo->addItem(name);
+        QString domain = QHostInfo::localDomainName();
+        if (!domain.isEmpty())
+            hostCombo->addItem(name + QChar('.') + domain);
+    }
+    if (name != QString("localhost"))
+        hostCombo->addItem(QString("localhost"));
+    // find out IP addresses of this machine
+    QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
+    // add non-localhost addresses
+    for (int i = 0; i < ipAddressesList.size(); i++)
+    {
+        if (!ipAddressesList.at(i).isLoopback())
+            hostCombo->addItem(ipAddressesList.at(i).toString());
+    }
+    // add localhost addresses
+    for (int i = 0; i < ipAddressesList.size(); i++)
+    {
+        if (ipAddressesList.at(i).isLoopback())
+            hostCombo->addItem(ipAddressesList.at(i).toString());
+    }
+
+    hostCombo->setEditable(true);
+
+    hostLabel->setBuddy(hostCombo);
+
+
     QNetworkConfigurationManager manager;
     if (manager.capabilities() & QNetworkConfigurationManager::NetworkSessionRequired)
     {
@@ -32,14 +65,10 @@ Server::Server(QWidget *parent): QDialog(parent), statusLabel(new QLabel), quitB
         statusLabel->setText(tr("Opening network session."));
         networkSession->open();
     }
-    else
-    {
-        sessionOpened();
-    }
 
+    connect(startButton, SIGNAL(clicked()), this, SLOT(sessionOpened()));
     connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
     connect(sendButton, SIGNAL(clicked()), this, SLOT(sendMessage()));
-    connect(tcpServer, SIGNAL(newConnection()), this, SLOT(newClient()));
     connect(newMessage, SIGNAL(textChanged(QString)), this, SLOT(enableSendButton()));
 
     resetLayout();
@@ -49,6 +78,8 @@ Server::Server(QWidget *parent): QDialog(parent), statusLabel(new QLabel), quitB
 
 void Server::sessionOpened()
 {
+    startButton->setEnabled(false);
+    hostCombo->setEnabled(false);
     // Save the used configuration
     if (networkSession)
     {
@@ -64,8 +95,13 @@ void Server::sessionOpened()
         settings.setValue(QLatin1String("DefaultNetworkConfiguration"), id);
         settings.endGroup();
     }
-
+    //this->
     tcpServer = new QTcpServer(this);
+
+    QLocalSocket *socketForServer = new QLocalSocket();
+    socketForServer->setServerName(hostCombo->currentText());
+
+    tcpServer->setSocketDescriptor(socketForServer->socketDescriptor());
     if (!tcpServer->listen())
     {
         QMessageBox::critical(this, tr("Message Server"),
@@ -91,6 +127,7 @@ void Server::sessionOpened()
     statusLabel->setText(tr("The server is running on\n\nIP: %1\nport: %2\n\n"
                             "Run the Message Client example now.")
                          .arg(ipAddress).arg(tcpServer->serverPort()));
+    connect(tcpServer, SIGNAL(newConnection()), this, SLOT(newClient()));
 }
 
 void Server::newClient()
@@ -150,15 +187,22 @@ void Server::resetLayout()
 {
     delete layout();
     QGridLayout *gridLayout = new QGridLayout;
+
+    gridLayout->addWidget(hostLabel);
+    gridLayout->addWidget(hostCombo);
+    gridLayout->addWidget(startButton);
     gridLayout->addWidget(statusLabel);
+
     int startIndex = 0;
     if (historySize < messages.length())
         startIndex = messages.length() - historySize;
     for (int i = startIndex; i < messages.length(); i++)
         gridLayout->addWidget(messages.at(i));
+
     gridLayout->addWidget(newMessage);
     gridLayout->addWidget(sendButton);
     gridLayout->addWidget(quitButton);
+
     setLayout(gridLayout);
 }
 

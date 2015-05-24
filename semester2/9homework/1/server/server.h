@@ -2,6 +2,7 @@
 
 #include <QtWidgets>
 #include <QTcpSocket>
+#include<QLocalSocket>
 #include <QtNetwork>
 
 /// server that can send and recieve messages
@@ -23,6 +24,10 @@ private slots:
     void enableSendButton();
 
 private:
+    QLabel *hostLabel;
+    QComboBox *hostCombo;
+    QPushButton *startButton;
+
     QLabel *statusLabel;
     QVector<QLabel*> messages;
 
