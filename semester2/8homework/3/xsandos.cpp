@@ -39,9 +39,10 @@ XsAndOs::XsAndOs(bool isTest, int size, QWidget *parent) : QMainWindow(parent), 
         for (int j = 0; j < size * size; j++)
             connect(field[i % size][i / size], SIGNAL(clickedCorrectly()), field[j % size][j / size], SLOT(nextTurn()));
 
-    gridLayout->addWidget(whoseTurn, size + 1, size - 1);
-
-    ui->centralWidget->setLayout(gridLayout);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    mainLayout->addWidget(whoseTurn);
+    mainLayout->addLayout(gridLayout);
+    ui->centralWidget->setLayout(mainLayout);
 
     QString str;
     QMessageBox *rules = new QMessageBox;
