@@ -50,11 +50,13 @@ FindPair::FindPair(int size, int numberOfCards, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::FindPair),
     size(size),
-    clickedOne(nullptr)
+    clickedOne(nullptr),
+    moves(0),
+    movesLine(new QLineEdit("0 moves"))
 {
     ui->setupUi(this);
 
-    QGridLayout *buttons = new QGridLayout;
+    buttons = new QGridLayout;
     MyButton *field[size * size];
     QString str;
 
@@ -71,7 +73,11 @@ FindPair::FindPair(int size, int numberOfCards, QWidget *parent) :
     for (int i = 0; i < size * size; i++)
         connect(field[i], SIGNAL(clicked()), this, SLOT(nextButton()));
 
-    ui->centralWidget->setLayout(buttons);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    mainLayout->addLayout(buttons);
+    mainLayout->addWidget(movesLine);
+    ui->centralWidget->setLayout(mainLayout);
 }
 
 FindPair::~FindPair()
@@ -91,6 +97,9 @@ void FindPair::nextButton()
     }
     else
     {
+        if (newButton->wasClicked())
+            return;
+
         if (clickedOne->number() == newButton->number())
         {
             clickedOne->disable();
@@ -103,5 +112,8 @@ void FindPair::nextButton()
             newButton->startTimer();
         }
         clickedOne = nullptr;
+        moves++;
+        QString str;
+        movesLine->setText(str.setNum(moves) + " moves");
     }
 }

@@ -12,7 +12,7 @@ class MyButton : public QObject
 
 public:
     MyButton(QPushButton *pushButton, QString number) : mNumber(number), pushButton(pushButton),
-        timer(new QTimer())
+        timer(new QTimer()), mWasClicked(false)
     {
         connect(pushButton, SIGNAL(clicked()), this, SIGNAL(clicked()));
         connect(timer, SIGNAL(timeout()), this, SLOT(enable()));
@@ -25,6 +25,7 @@ public:
     void show()
     {
         pushButton->setText(mNumber);
+        mWasClicked = true;
     }
 
     QString number()
@@ -44,10 +45,16 @@ public:
         timer->start(400);
     }
 
+    bool wasClicked()
+    {
+        return mWasClicked;
+    }
+
 private:
     QString mNumber;
     QPushButton *pushButton;
     QTimer *timer;
+    bool mWasClicked;
 
 signals:
     void clicked();
@@ -56,6 +63,7 @@ public slots:
     /// works when we don't guess
     void enable()
     {
+        mWasClicked = false;
         pushButton->setText("");
         timer->stop();
     }
