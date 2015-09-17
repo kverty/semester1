@@ -207,7 +207,7 @@ void Client::resetLayout()
 {
     delete layout();
 
-    QGridLayout *mainLayout = new QGridLayout;
+    QGridLayout *mainLayout = new QGridLayout();
     /*mainLayout->addWidget(hostLabel, 0, 0);
     mainLayout->addWidget(hostCombo, 0, 1);
     mainLayout->addWidget(portLabel, 1, 0);
