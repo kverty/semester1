@@ -1,0 +1,84 @@
+#include "queue.h"
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+template<typename T>
+Queue<T>::~Queue()
+{
+    QueueElement *element = head;
+
+    while(element != nullptr)
+    {
+        QueueElement *nextElement = element->next;
+        delete element;
+        element = nextElement;
+    }
+}
+
+template<typename T>
+void Queue<T>::recursiveAdd(T value, std::function<int(T)> priority, QueueElement *element)
+{
+    if (element->next == nullptr || priority(value) > priority(element->value))
+    {
+        element->next = new QueueElement(value, element->next);
+        return;
+    }
+    recursiveAdd(value, priority, element->next);
+}
+
+/*
+template<typename T>
+void Queue<T>::enqueue(T value, std::function<int(T)> priority)
+{
+    if (head == nullptr)
+    {
+        head = new QueueElement(value, nullptr);
+        return;
+    }
+    if (priority(value) > priority(head->value))
+    {
+        head = new QueueElement(value, head);
+        return;
+    }
+    recursiveAdd(value, priority, head);
+}
+*/
+
+template<typename T>
+void Queue<T>::enqueue(int value, std::function<int(int)> priority)
+{
+}
+
+template<typename T>
+T Queue<T>::dequeue(std::function<int(T)> priority)
+{
+    QueueElement *element = head;
+    int maxPriority = 0;
+    T value;
+
+    while(element != nullptr)
+    {
+        if (maxPriority < priority(element->value))
+            maxPriority = priority(element->value);
+        element = element->next;
+    }
+
+    QueueElement *currentElement = head;
+    while (currentElement->next != nullptr)
+    {
+        if (priority(currentElement->value) == maxPriority)
+        {
+            value = currentElement->value;
+            QueueElement *element = currentElement->next->next;
+            delete currentElement->next;
+            currentElement->next = element;
+            break;
+        }
+        currentElement = currentElement->next;
+    }
+    return value;
+}
+
+
