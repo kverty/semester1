@@ -1,5 +1,12 @@
 #include "computer.h"
 #include <cstdlib>
+#include <iostream>
+#include <ctime>
+
+Computer::~Computer()
+{
+    delete neighbours;
+}
 
 int Computer::currentState()
 {
@@ -11,9 +18,7 @@ void Computer::attacked()
     if (state != healthy)
         return;
 
-    //srand(time(0));
-
-    if (chanceToBeInfected > 0)//rand(constForRand) / constForoRand)
+    if (chanceToBeInfected > double(rand() % constForRand) / constForRand)
         state = newlyInfected;
 }
 
@@ -29,6 +34,12 @@ void Computer::touchOthers()
 }
 
 void Computer::infectNewlyInfected()
+{
+    if (state == newlyInfected)
+        state = infected;
+}
+
+void Computer::infect()
 {
     state = infected;
 }

@@ -1,8 +1,8 @@
 #pragma once
 #include "list.h"
 #include "computer.h"
-//#include "linuxcomputer.h"
-//#include "windowscomputer.h"
+#include "linuxcomputer.h"
+#include "windowscomputer.h"
 
 #include <iostream>
 
@@ -13,8 +13,8 @@ public:
     ~LocalNetwork();
     void startThisTurn();
 
-private:
     void writeResults();
+private:
     void dealWithNewlyInfected(); // just changes state of some computers
 
     List<Computer*> *computers;

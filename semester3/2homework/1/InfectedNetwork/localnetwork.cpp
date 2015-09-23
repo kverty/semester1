@@ -4,7 +4,6 @@
 LocalNetwork::LocalNetwork(FILE *inputFile) : computers(new List<Computer*>())
 {
     fscanf(inputFile, "%d", &numberOfComputers);
-
     for (int i = 0; i < numberOfComputers; i++)
     {
         int type = 0;
@@ -13,8 +12,8 @@ LocalNetwork::LocalNetwork(FILE *inputFile) : computers(new List<Computer*>())
         fscanf(inputFile, "%d", &type);
         switch (type)
         {
-            case 1 : currentComputer = new Computer(0.15);
-            case 2 : currentComputer = new Computer(0.12);
+            case 1 : currentComputer = new LinuxComputer(); break;
+            case 2 : currentComputer = new WindowsComputer(); break;
         }
 
         computers->addElement(currentComputer);
@@ -40,14 +39,18 @@ LocalNetwork::LocalNetwork(FILE *inputFile) : computers(new List<Computer*>())
     for (int i = 0; i < numberOfInfected; i++)
     {
         int index = 0;
-
         fscanf(inputFile, "%d", &index);
 
-        computers->get(index)->infectNewlyInfected();
+        computers->get(index)->infect();
     }
 
     fclose(inputFile);
 
+}
+
+LocalNetwork::~LocalNetwork()
+{
+    delete computers;
 }
 
 void LocalNetwork::startThisTurn()
@@ -56,14 +59,13 @@ void LocalNetwork::startThisTurn()
         computers->get(i)->touchOthers();
 
     dealWithNewlyInfected();
-
-    writeResults();
 }
 
 void LocalNetwork::writeResults()
 {
     for (int i = 0; i < numberOfComputers; i++)
-        std::cout << (int) computers->get(i)->currentState() << " ";
+        std::cout << computers->get(i)->currentState() << " ";
+    std::cout << "\n";
 }
 
 void LocalNetwork::dealWithNewlyInfected()

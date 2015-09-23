@@ -14,16 +14,12 @@ enum State
 class Computer
 {
 public:
-    Computer(double chance) : chanceToBeInfected(chance)
-    {
-        state = 0;
-        neighbours = new List<Computer *>();
-    }
-    ~Computer() {}
+    ~Computer();
     int currentState();
     void attacked();
     void touchOthers();
     void infectNewlyInfected();
+    void infect();
     void addNeighbour(Computer *computer);
 
 protected:
