@@ -2,6 +2,7 @@
 #include <ctime>
 
 #include "localnetwork.h"
+#include "computertest.h"
 
 const int maxSizeOfName = 100;
 
@@ -16,6 +17,9 @@ enum Command
 
 int main()
 {
+    ComputerTest test;
+    QTest::qExec(&test);
+
     srand(time(0));
 
     FILE * file = NULL;

@@ -8,7 +8,7 @@ Computer::~Computer()
     delete neighbours;
 }
 
-int Computer::currentState()
+int Computer::currentState() const
 {
     return state;
 }
@@ -22,15 +22,15 @@ void Computer::attacked()
         state = newlyInfected;
 }
 
-void Computer::touchOthers()
+void Computer::touchOthers() const
 {
     if (state != infected)
         return;
 
-    int length = neighbours->length();
+    ListIterator<Computer*> *iter = new ListIterator<Computer*>(neighbours);
 
-    for (int i = 0; i < length; i++)
-        neighbours->get(i)->attacked();
+    for (iter->first(); !iter->isDone(); iter->next())
+        iter->currentItem()->attacked();
 }
 
 void Computer::infectNewlyInfected()
@@ -44,7 +44,7 @@ void Computer::infect()
     state = infected;
 }
 
-void Computer::addNeighbour(Computer *computer)
+void Computer::addNeighbour(Computer *computer) const
 {
     neighbours->addElement(computer);
 }

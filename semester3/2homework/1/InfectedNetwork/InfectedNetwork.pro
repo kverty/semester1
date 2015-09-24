@@ -1,3 +1,6 @@
+QT       += core
+TARGET = 1
+
 TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
@@ -15,6 +18,9 @@ HEADERS += \
     computer.h \
     list.h \
     linuxcomputer.h \
-    windowscomputer.h
+    windowscomputer.h \
+    listiterator.h \
+    computertest.h
 
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++0x
+QT += testlib

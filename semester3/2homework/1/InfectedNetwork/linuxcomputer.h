@@ -4,14 +4,10 @@
 class LinuxComputer : public Computer
 {
 public:
-    LinuxComputer()// : chanceToBeInfected(0.12), state(healthy), neighbours(new List<Computer *>())
+    LinuxComputer()
     {
         chanceToBeInfected = 0.5;
         state = 0;
         neighbours = new List<Computer *>();
     }
-//protected:
-//    double chanceToBeInfected;
-//    int state;
-//    List<Computer *> *neighbours;
 };

@@ -4,7 +4,6 @@
 using namespace std;
 
 template <class Item>
-
 class List
 {
 public:
@@ -29,6 +28,7 @@ private:
     ListElement *head;
 };
 
+/// из-за шаблона пришлось реализацию тут же писать
 template <class Item>
 List<Item>::~List()
 {
