@@ -2,7 +2,24 @@
 #include "list.h"
 #include "listiterator.h"
 
+#include <QObject>
+#include <QTest>
+
 const int constForRand = 100;
+
+class ComputerTest : public QObject
+{
+   Q_OBJECT
+public:
+   explicit ComputerTest(QObject *parent = 0) : QObject(parent) {}
+
+private slots:
+    void probabilityTest(); 
+    void spreadTest();
+private:
+    int numberOfTests = 20;
+    int epsilon = 0.1;
+};
 
 enum State
 {

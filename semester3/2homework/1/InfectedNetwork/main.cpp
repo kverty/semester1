@@ -2,7 +2,6 @@
 #include <ctime>
 
 #include "localnetwork.h"
-#include "computertest.h"
 
 const int maxSizeOfName = 100;
 
