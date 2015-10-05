@@ -4,8 +4,24 @@
 #include "computer.h"
 #include "linuxcomputer.h"
 #include "windowscomputer.h"
+#include "testingcomputer.h"
 
 #include <iostream>
+
+#include <QObject>
+#include <QTest>
+
+class NetworkTest : public QObject
+{
+   Q_OBJECT
+public:
+   explicit NetworkTest(FILE *fileWithTest, QObject *parent = 0) : inputFile(fileWithTest), QObject(parent) {}
+
+private slots:
+    void networkTest();
+private:
+    FILE *inputFile;
+};
 
 /// класс для локальной сети, ничего не знает о связях между компьютерами, инициирует передачу данных
 class LocalNetwork
@@ -20,9 +36,11 @@ public:
 
     /// выводятся результаты передачи данных, кто заражен, кто нет
     void writeResults() const;
+
+    friend NetworkTest;
 private:
     /// вызывается в конце, для того чтобы перевести всех newlyInfected в infected
-    void dealWithNewlyInfected(); // just changes state of some computers
+    void dealWithNewlyInfected();
 
     /// список компьютеров
     List<Computer*> *computers;

@@ -16,6 +16,7 @@ LocalNetwork::LocalNetwork(FILE *inputFile) : computers(new List<Computer*>())
         {
             case 1 : currentComputer = new LinuxComputer(); break;
             case 2 : currentComputer = new WindowsComputer(); break;
+            case 3 : currentComputer = new TestingComputer(); break;
         }
 
         computers->addElement(currentComputer);
@@ -32,10 +33,12 @@ LocalNetwork::LocalNetwork(FILE *inputFile) : computers(new List<Computer*>())
             int isLinked = 0;
 
             fscanf(inputFile, "%d", &isLinked);
-            //std::cout << isLinked;
+
             if (isLinked)
                 iter1->currentItem()->addNeighbour(iter2->currentItem());
         }
+
+        delete iter2;
     }
 
     int numberOfInfected = 0;
@@ -52,10 +55,17 @@ LocalNetwork::LocalNetwork(FILE *inputFile) : computers(new List<Computer*>())
 
     fclose(inputFile);
 
+    delete iter1;
 }
 
 LocalNetwork::~LocalNetwork()
 {
+    ListIterator<Computer*> *iter = new ListIterator<Computer*>(computers);
+
+    for (iter->first(); !iter->isDone(); iter->next())
+        delete iter->currentItem();
+
+    delete iter;
     delete computers;
 }
 
@@ -67,6 +77,8 @@ void LocalNetwork::startThisTurn()
         iter->currentItem()->touchOthers();
 
     dealWithNewlyInfected();
+
+    delete iter;
 }
 
 void LocalNetwork::writeResults() const
@@ -76,6 +88,8 @@ void LocalNetwork::writeResults() const
     for (iter->first(); !iter->isDone(); iter->next())
         std::cout << iter->currentItem()->currentState() << " ";
     std::cout << "\n";
+
+    delete iter;
 }
 
 void LocalNetwork::dealWithNewlyInfected()
@@ -84,4 +98,6 @@ void LocalNetwork::dealWithNewlyInfected()
 
     for (iter->first(); !iter->isDone(); iter->next())
         iter->currentItem()->infectNewlyInfected();
+
+    delete iter;
 }

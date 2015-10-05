@@ -18,7 +18,7 @@ TEMPLATE = app
 SOURCES += main.cpp \
     computer.cpp \
     localnetwork.cpp \
-    computertest.cpp
+    localnetworktest.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -29,7 +29,9 @@ HEADERS += \
     list.h \
     linuxcomputer.h \
     windowscomputer.h \
-    listiterator.h
+    listiterator.h \
+    computertest.h \
+    testingcomputer.h
 
 QMAKE_CXXFLAGS += -std=c++0x
 QT += testlib

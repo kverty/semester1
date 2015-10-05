@@ -31,6 +31,8 @@ void Computer::touchOthers() const
 
     for (iter->first(); !iter->isDone(); iter->next())
         iter->currentItem()->attacked();
+
+    delete iter;
 }
 
 void Computer::infectNewlyInfected()

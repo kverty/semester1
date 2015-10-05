@@ -2,6 +2,7 @@
 #include <ctime>
 
 #include "localnetwork.h"
+#include "computertest.h"
 
 const int maxSizeOfName = 100;
 
@@ -15,9 +16,14 @@ enum Command
 };
 
 int main()
-{
+{    
+    NetworkTest *networkTest = new NetworkTest(fopen("testExample.txt", "r"));
     ComputerTest test;
+
     QTest::qExec(&test);
+    QTest::qExec(networkTest);
+
+    delete networkTest;
 
     srand(time(0));
 
@@ -27,7 +33,7 @@ int main()
     cout << "Please, enter the name of the file with the number of vertexes and matrix : " << endl;
 
     scanf("%s", filename);
-    file = fopen (filename, "r");
+    file = fopen(filename, "r");
 
     if (file == NULL)
     {
