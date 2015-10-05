@@ -17,6 +17,7 @@ enum Command
 
 int main()
 {    
+    /// testExample.txt should be put correctly before running this program
     NetworkTest *networkTest = new NetworkTest(fopen("testExample.txt", "r"));
     ComputerTest test;
 
