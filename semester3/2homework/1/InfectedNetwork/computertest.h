@@ -12,6 +12,7 @@ public:
    explicit ComputerTest(QObject *parent = 0) : QObject(parent) {}
 
 private slots:
+    /// тест, проверяющий правильно ли компьютер заражаетСЯ, с нужной ли вероятностью; тестируется метод attacked()
     void probabilityTest()
     {
         Computer *testedComputer;
@@ -31,6 +32,7 @@ private slots:
         QVERIFY(abs(double(numberOfInfected)/numberOfTests - 0.5) < 0.1);
     }
 
+    /// тест, проверяющий правильно ли компьютер заражает; тестируется метод touchOthers();
     void spreadTest()
     {
         Computer **testComputers = new Computer *[numberOfTests];
