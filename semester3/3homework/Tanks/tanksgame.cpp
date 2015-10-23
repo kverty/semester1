@@ -31,20 +31,8 @@ TanksGame::TanksGame(QWidget *) :
 TanksGame::~TanksGame()
 {
     delete scene;
-    delete tank;
-
-    for (int i = 0; i < bullets->length(); i++)
-    {
-        delete bullets->at(i);
-    }
     delete bullets;
-
     delete redrawingTimer;
-
-    for (int i = 0; i < bullets->length(); i++)
-    {
-        delete landscape->at(i);
-    }
     delete landscape;
 }
 
