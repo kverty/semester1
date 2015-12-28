@@ -36,7 +36,7 @@ PieceOfLandscape::PieceOfLandscape(QPoint start, QPoint finish) :
         dx = -dx;
         dy = -dy;
     }
-    std::cout << dx << " " << dy << std::endl;
+    //std::cout << dx << " " << dy << std::endl;
 }
 
 QRectF PieceOfLandscape::boundingRect() const

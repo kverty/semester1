@@ -90,9 +90,9 @@ ClientTankWindow::~ClientTankWindow()
 
 void ClientTankWindow::keyPressEvent(QKeyEvent *event)
 {
-    std::cout << "i am still working! " << event->key();
+    //std::cout << "i am still working! " << event->key() << " != " << Qt::Key_A << "!! ";
     game->myTankMoved(event);
-    std::cout << "i am still working! " << event->key();
+    //std::cout << "i am still working! " << event->key();
     if (tcpSocket != nullptr)
         sendMessage(event->key());
 }
