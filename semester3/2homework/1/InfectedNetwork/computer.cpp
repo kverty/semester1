@@ -2,10 +2,17 @@
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
-
+/*
+Computer::Computer(Generator *generator) :
+    state(0), neighbours(new List<Computer*>()),
+    generator(generator)
+{
+}
+*/
 Computer::~Computer()
 {
     delete neighbours;
+    delete generator;
 }
 
 int Computer::currentState() const
@@ -18,7 +25,7 @@ void Computer::attacked()
     if (state != healthy)
         return;
 
-    if (chanceToBeInfected > double(rand() % constForRand) / constForRand)
+    if (generator->checkChance(chanceToBeInfected))
         state = newlyInfected;
 }
 

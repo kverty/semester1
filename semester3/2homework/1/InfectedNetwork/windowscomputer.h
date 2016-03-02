@@ -4,10 +4,18 @@
 class WindowsComputer : public Computer
 {
 public:
-    WindowsComputer()
+    /*
+    WindowsComputer(Generator *generator)
+    {
+        chanceToBeInfected = 0.3;
+        Computer(generator);
+    }
+    */
+    WindowsComputer(Generator *generator)
     {
         chanceToBeInfected = 0.3;
         state = 0;
-        neighbours = new List<Computer *>();
+        neighbours = new List<Computer*>();
+        this->generator = generator;
     }
 };

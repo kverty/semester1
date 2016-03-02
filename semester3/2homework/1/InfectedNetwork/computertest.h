@@ -1,9 +1,14 @@
 #pragma once
 #include "linuxcomputer.h"
 #include "computer.h"
+#include "randomgenerator.h"
 
 #include <QObject>
 #include <QTest>
+#include <iostream>
+#include <ctime>
+
+using namespace  std;
 
 class ComputerTest : public QObject
 {
@@ -15,12 +20,13 @@ private slots:
     /// тест, проверяющий правильно ли компьютер заражаетСЯ, с нужной ли вероятностью; тестируется метод attacked()
     void probabilityTest()
     {
-        Computer *testedComputer;
+        srand(time(0));
         int numberOfInfected = 0;
 
         for (int i = 0; i < numberOfTests; i++)
         {
-            testedComputer = new LinuxComputer();
+            Generator *generator = new RandomGenerator();
+            Computer *testedComputer = new LinuxComputer(generator);
 
             testedComputer->attacked();
             if (testedComputer->currentState() != healthy)
@@ -35,15 +41,18 @@ private slots:
     /// тест, проверяющий правильно ли компьютер заражает; тестируется метод touchOthers();
     void spreadTest()
     {
+        srand(time(0));
+        Generator *generator = new RandomGenerator();
+
         Computer **testComputers = new Computer *[numberOfTests];
         int numberOfInfected = 0;
 
-        Computer *infectedComputer = new LinuxComputer();
+        Computer *infectedComputer = new LinuxComputer(generator);
         infectedComputer->infect();
 
         for (int i = 0; i < numberOfTests; i++)
         {
-            testComputers[i] = new LinuxComputer();
+            testComputers[i] = new LinuxComputer(generator);
             infectedComputer->addNeighbour(testComputers[i]);
         }
 
@@ -62,6 +71,6 @@ private slots:
     }
 
 private:
-    int numberOfTests = 20;
+    int numberOfTests = 200;
     int epsilon = 0.1;
 };

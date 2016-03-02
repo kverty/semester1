@@ -11,24 +11,12 @@
 #include <QObject>
 #include <QTest>
 
-class NetworkTest : public QObject
-{
-   Q_OBJECT
-public:
-   explicit NetworkTest(FILE *fileWithTest, QObject *parent = 0) : inputFile(fileWithTest), QObject(parent) {}
-
-private slots:
-    void networkTest();
-private:
-    FILE *inputFile;
-};
-
 /// класс для локальной сети, ничего не знает о связях между компьютерами, инициирует передачу данных
 class LocalNetwork
 {
 public:
     /// считывает информацию о сети из файла
-    LocalNetwork(FILE *inputFile);
+    LocalNetwork(Generator *generator, FILE *inputFile);
     ~LocalNetwork();
 
     /// начинается передача данных от каждого копьютера всем
@@ -38,7 +26,7 @@ public:
     void writeResults() const;
 
     /// внутри теста необхожимо обращаться к списку компьютеров
-    friend NetworkTest;
+    List<Computer*> *getComputers();
 private:
     /// вызывается в конце, для того чтобы перевести всех newlyInfected в infected
     void dealWithNewlyInfected();

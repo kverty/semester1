@@ -18,10 +18,11 @@ TEMPLATE = app
 SOURCES += main.cpp \
     computer.cpp \
     localnetwork.cpp \
-    localnetworktest.cpp
+    randomgenerator.cpp \
+    testgenerator.cpp
 
-include(deployment.pri)
-qtcAddDeployment()
+#include(deployment.pri)
+#qtcAddDeployment()
 
 HEADERS += \
     localnetwork.h \
@@ -31,7 +32,11 @@ HEADERS += \
     windowscomputer.h \
     listiterator.h \
     computertest.h \
-    testingcomputer.h
+    testingcomputer.h \
+    localnetworktest.h \
+    generator.h \
+    randomgenerator.h \
+    testgenerator.h
 
 QMAKE_CXXFLAGS += -std=c++0x
 QT += testlib

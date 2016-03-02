@@ -2,7 +2,9 @@
 #include <ctime>
 
 #include "localnetwork.h"
+#include "localnetworktest.h"
 #include "computertest.h"
+#include "randomgenerator.h"
 
 const int maxSizeOfName = 100;
 
@@ -16,15 +18,13 @@ enum Command
 };
 
 int main()
-{    
+{
     /// testExample.txt should be put correctly before running this program
-    NetworkTest *networkTest = new NetworkTest(fopen("testExample.txt", "r"));
-    ComputerTest test;
+    NetworkTest networkTest;
+    //ComputerTest test;
 
-    QTest::qExec(&test);
-    QTest::qExec(networkTest);
-
-    delete networkTest;
+    //QTest::qExec(&test);
+    QTest::qExec(&networkTest);
 
     srand(time(0));
 
@@ -43,7 +43,7 @@ int main()
         return 0;
     }
 
-    LocalNetwork *network = new LocalNetwork(file);
+    LocalNetwork *network = new LocalNetwork(new RandomGenerator(), file);
     bool inProcess = true;
 
     while (inProcess)

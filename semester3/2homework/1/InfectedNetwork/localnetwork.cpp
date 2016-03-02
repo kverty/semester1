@@ -1,7 +1,7 @@
 #include <iostream>
 #include "localnetwork.h"
 
-LocalNetwork::LocalNetwork(FILE *inputFile) : computers(new List<Computer*>())
+LocalNetwork::LocalNetwork(Generator *generator, FILE *inputFile) : computers(new List<Computer*>())
 {
     int numberOfComputers = 0;
     fscanf(inputFile, "%d", &numberOfComputers);
@@ -14,9 +14,9 @@ LocalNetwork::LocalNetwork(FILE *inputFile) : computers(new List<Computer*>())
         fscanf(inputFile, "%d", &type);
         switch (type)
         {
-            case 1 : currentComputer = new LinuxComputer(); break;
-            case 2 : currentComputer = new WindowsComputer(); break;
-            case 3 : currentComputer = new TestingComputer(); break;
+            case 1 : currentComputer = new LinuxComputer(generator); break;
+            case 2 : currentComputer = new WindowsComputer(generator); break;
+            case 3 : currentComputer = new TestingComputer(generator); break;
         }
 
         computers->addElement(currentComputer);
@@ -90,6 +90,11 @@ void LocalNetwork::writeResults() const
     std::cout << "\n";
 
     delete iter;
+}
+
+List<Computer *> *LocalNetwork::getComputers()
+{
+    return computers;
 }
 
 void LocalNetwork::dealWithNewlyInfected()

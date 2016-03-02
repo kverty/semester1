@@ -2,7 +2,7 @@
 #include "list.h"
 #include "listiterator.h"
 
-const int constForRand = 100;
+#include "generator.h"
 
 enum State
 {
@@ -15,6 +15,7 @@ enum State
 class Computer
 {
 public:
+    //Computer(Generator *generator);
     ~Computer();
     int currentState() const;
 
@@ -37,6 +38,7 @@ protected:
     /// зависит от ОС и может быть чего-нибудь еще
     double chanceToBeInfected;
     int state;
+    Generator *generator;
     /// те компьютеры, с кем этот компьютер связан
     List<Computer *> *neighbours;
 };
