@@ -1,6 +1,9 @@
 import Data.List
 
-numberOfVarious:: [Int] -> Int
+allAreDifferent :: [Int] -> Bool
+allAreDifferent list = length list == numberOfVarious list
+
+numberOfVarious :: [Int] -> Int
 numberOfVarious list = numberOfVarious' (sort list)
 
 numberOfVarious' :: [Int] -> Int
