@@ -5,7 +5,7 @@ data Expression = X
     | Sub Expression Expression
     | Div Expression Expression
     | Pow Expression Int
-    deriving Show
+    deriving (Show, Eq)
 
 derive :: Expression -> Expression
 derive X = (Const 1)
@@ -44,6 +44,13 @@ simplify (Pow exp1 deg) = Pow (simplify exp1) deg
 
 simplify exp = exp
 
+multiSimplify :: Expression -> Expression
+multiSimplify exp 
+    | exp == simplify exp = exp
+    | otherwise = multiSimplify (simplify exp)
+
 main = do
         putStrLn (show $ derive (Sum (Mult (Const 3) (Pow X 4)) (Sub (Pow X 3) (Sum (Mult (Const 5) X) (Const (-3))))))
-        putStrLn (show $ simplify $ derive (Sum (Mult (Const 3) (Pow X 4)) (Sub (Pow X 3) (Sum (Mult (Const 5) X) (Const (-3))))))
+        putStrLn (show $ multiSimplify $ derive (Sum (Mult (Const 3) (Pow X 4)) (Sub (Pow X 3) (Sum (Mult (Const 5) X) (Const (-3))))))
+
+        putStrLn (show $ multiSimplify $ derive (Sum (Const 1) (X)))
