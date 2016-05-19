@@ -11,7 +11,7 @@ listMult [] ls = []
 
 showCoef :: (Num a, Show a, Eq a, Ord a) => a -> Bool -> String
 showCoef c isFirst
-    | c == 1 && isFirst = " "
+    | c == 1 && isFirst = " 1"
     | c == 1 && not isFirst = "+"  
     | c == -1 = "-"
     | c < 0 = show c
@@ -48,5 +48,7 @@ main = do
     putStrLn("p =" ++ show p)
     let q = Polynom [3, -1, 2]
     putStrLn("q =" ++ show q)
+    let r = Polynom [1, 0, 1]
+    putStrLn("r =" ++ show r)
     putStrLn("p + q =" ++ show (add p q))
     putStrLn("p * q =" ++ show (mult p q))
