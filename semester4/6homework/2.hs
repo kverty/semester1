@@ -39,21 +39,25 @@ instance Ord Vertex where
 
 data Graph = Graph [Vertex] [Edge]
             deriving Show
-            
+
+toNormalForm :: [Vertex] -> [(Int, Int, Maybe [Edge])]
 toNormalForm [] = []
 toNormalForm ((Vertex id Nothing) : vs) = (id, -1, Nothing) : (toNormalForm vs)
 toNormalForm ((Vertex id (Just (Label dist es))) : vs) = (id, dist, Just es) : (toNormalForm vs)
 
+sumMaybe :: Maybe Label -> Maybe Label -> Maybe Label
 sumMaybe (Just _) Nothing = Nothing
 sumMaybe Nothing Nothing = Nothing
 sumMaybe Nothing (Just _) = Nothing
 sumMaybe (Just (Label dist1 es1)) (Just (Label dist2 es2)) = Just (Label (dist1 + dist2) (es1 ++ es2))
 
+findEdge :: Int -> Int -> [Edge] -> Maybe Label
 findEdge _ _ [] = Nothing
 findEdge id1 id2 (e : ess)
     | id1 == (idFrom e) && id2 == (idTo e) = Just (Label (weight e) (e : []))
     | otherwise = findEdge id1 id2 ess
 
+dijkstra :: Graph -> [(Int, Int, Maybe [Edge])]
 dijkstra (Graph vs es) = toNormalForm (dijkstra' [] vs)
     where dijkstra' visited [] = visited
           dijkstra' visited rest =
